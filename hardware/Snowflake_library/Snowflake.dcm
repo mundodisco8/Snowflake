@@ -4,6 +4,10 @@ $CMP 556
 F http://www.ti.com/lit/ds/symlink/na556.pdf
 $ENDCMP
 #
+$CMP 74HC595
+F https://assets.nexperia.com/documents/data-sheet/74HC_HCT595.pdf
+$ENDCMP
+#
 $CMP C_Small
 D Unpolarized capacitor, small symbol
 K capacitor cap
@@ -19,6 +23,24 @@ $ENDCMP
 $CMP Mux_1_of_8
 D Pin compatible devices: PI5C3251, CBT325, SN74CBT3251, ...
 F http://www.ti.com/lit/ds/symlink/sn74cbt3251.pdf
+$ENDCMP
+#
+$CMP Opamp_Dual
+D Dual operational amplifier
+K dual opamp
+F ~
+$ENDCMP
+#
+$CMP Opamp_Single
+D Dual operational amplifier
+K dual opamp
+F ~
+$ENDCMP
+#
+$CMP R_POT_Small
+D Potentiometer
+K resistor variable
+F ~
 $ENDCMP
 #
 $CMP R_Small

@@ -1,4 +1,4 @@
-2901677096050534
+2904828458275671
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -10562,6 +10562,13 @@ SMD Shunt Resistor
 0
 4
 2
+SnowFlake2
+Snowflake
+
+
+0
+2
+2
 Snowflake
 14-SOIC_4x8.75mm_.5-NA556
 
@@ -10569,6 +10576,13 @@ Snowflake
 0
 14
 14
+Snowflake
+16-TSSOP_5x6.5mm_P0.65-74HC565
+
+
+0
+16
+16
 Snowflake
 16-TSSOP_5x6.5mm_P0.65-MUX
 

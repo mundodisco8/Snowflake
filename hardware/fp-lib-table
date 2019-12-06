@@ -1,4 +1,5 @@
 (fp_lib_table
   (lib (name Snowflake)(type KiCad)(uri ${KIPRJMOD}/Snowflake_library/Snowflake.pretty)(options "")(descr ""))
   (lib (name felcana-kicad-library)(type KiCad)(uri C:/Users/Joel/Workspace/felcana-kicad-library/felcana.pretty)(options "")(descr ""))
+  (lib (name SnowFlake2)(type KiCad)(uri C:/Users/Joel/Workspace/SnowFlake2)(options "")(descr ""))
 )
