@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:Snowflake-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -230,8 +229,8 @@ U 1 1 5DE8F84F
 P 1650 1200
 F 0 "RV1" H 1590 1246 50  0000 R CNN
 F 1 "200kΩ" H 1590 1155 50  0000 R CNN
-F 2 "Snowflake:0805-R_Handsolder" H 1650 1200 50  0001 C CNN
-F 3 "~" H 1650 1200 50  0001 C CNN
+F 2 "Snowflake:Potentiometer_TC33X-2-204E" H 1650 1200 50  0001 C CNN
+F 3 "https://www.bourns.com/docs/Product-Datasheets/TC33.pdf" H 1650 1200 50  0001 C CNN
 	1    1650 1200
 	1    0    0    -1  
 $EndComp
@@ -414,8 +413,8 @@ U 1 1 5DE9961F
 P 8000 1300
 F 0 "SW1" V 7954 1398 50  0000 L CNN
 F 1 "SW_SPST" V 8045 1398 50  0000 L CNN
-F 2 "" H 8000 1300 50  0001 C CNN
-F 3 "~" H 8000 1300 50  0001 C CNN
+F 2 "Snowflake:Slide_Switch_JS202011SCQN" H 8000 1300 50  0001 C CNN
+F 3 "https://dznh3ojzb2azq.cloudfront.net/products/Slide/JS/documents/datasheet.pdf" H 8000 1300 50  0001 C CNN
 	1    8000 1300
 	0    1    1    0   
 $EndComp
@@ -474,8 +473,6 @@ Wire Wire Line
 Wire Notes Line
 	500  4000 3700 4000
 Wire Notes Line
-	3700 4000 3700 500 
-Wire Notes Line
 	6000 3000 6000 500 
 Wire Notes Line
 	7500 3000 7500 500 
@@ -484,24 +481,24 @@ Wire Notes Line
 Wire Notes Line
 	3700 3000 11200 3000
 $Comp
-L Snowflake:Opamp_Single U1
+L Snowflake:Opamp_Single_MCP6001 U1
 U 1 1 5DEBF37F
 P 2450 1500
 F 0 "U1" H 2450 1867 50  0000 C CNN
 F 1 "Opamp_Single" H 2450 1776 50  0000 C CNN
-F 2 "" H 2450 1500 50  0001 C CNN
-F 3 "~" H 2450 1500 50  0001 C CNN
+F 2 "Snowflake:Op_Amp_SOT23_MCP6001T" H 2450 1500 50  0001 C CNN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/20001733K.pdf" H 2450 1500 50  0001 C CNN
 	1    2450 1500
 	1    0    0    -1  
 $EndComp
 $Comp
-L Snowflake:Opamp_Single U1
+L Snowflake:Opamp_Single_MCP6001 U1
 U 2 1 5DEBF9DB
 P 900 1450
 F 0 "U1" H 958 1496 50  0000 L CNN
 F 1 "Opamp_Single" H 958 1405 50  0000 L CNN
-F 2 "" H 900 1450 50  0001 C CNN
-F 3 "~" H 900 1450 50  0001 C CNN
+F 2 "Snowflake:Op_Amp_SOT23_MCP6001T" H 900 1450 50  0001 C CNN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/20001733K.pdf" H 900 1450 50  0001 C CNN
 	2    900  1450
 	1    0    0    -1  
 $EndComp
@@ -527,4 +524,6 @@ F 3 "" H 9850 1550 50  0001 C CNN
 	2    9600 1450
 	1    0    0    -1  
 $EndComp
+Wire Notes Line
+	3700 4000 3700 500 
 $EndSCHEMATC

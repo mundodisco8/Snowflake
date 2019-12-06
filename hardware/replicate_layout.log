@@ -1,0 +1,111 @@
+12-06 17:18:45 replicate_layout.action_replicate_layout 295:Replicate layout plugin version: 46 started
+12-06 17:18:45 replicate_layout.action_replicate_layout 327:Preparing replicator with D2 as a reference
+12-06 17:18:45 replicate_layout.replicatelayout 201:getting project hierarchy from schematics
+12-06 17:18:45 replicate_layout.replicatelayout 203:Project hierarchy looks like:
+{'5DD0D430': ['Stem 6', u'C:\\Users\\TerayzaEldridge\\Workspace\\Snowflake\\hardware\\LED_Stem.sch'], '5DD08BF1': ['Stem 2', u'C:\\Users\\TerayzaEldridge\\Workspace\\Snowflake\\hardware\\LED_Stem.sch'], '5DD0BF7E': ['Stem 5', u'C:\\Users\\TerayzaEldridge\\Workspace\\Snowflake\\hardware\\LED_Stem.sch'], '5DCE640D': ['Led Stem 1', u'C:\\Users\\TerayzaEldridge\\Workspace\\Snowflake\\hardware\\LED_Stem.sch'], '5DD0ACE2': ['Stem 4', u'C:\\Users\\TerayzaEldridge\\Workspace\\Snowflake\\hardware\\LED_Stem.sch'], '5DD09BFC': ['Stem 3', u'C:\\Users\\TerayzaEldridge\\Workspace\\Snowflake\\hardware\\LED_Stem.sch']}
+12-06 17:18:45 replicate_layout.replicatelayout 211:getting a list of all footprints on board
+12-06 17:18:45 replicate_layout.action_replicate_layout 353:Pivot footprint is u'D2'
+Located on:['Led Stem 1']
+With filenames:[u'LED_Stem.sch']
+With sheet_id:['Led Stem 1']
+12-06 17:18:45 replicate_layout.action_replicate_layout 357:Corresponding footprints are 
+[(u'D2', ['Led Stem 1']), (u'D6', ['Stem 2']), (u'D10', ['Stem 3']), (u'D14', ['Stem 4']), (u'D18', ['Stem 5']), (u'D22', ['Stem 6'])]
+12-06 17:18:45 replicate_layout.action_replicate_layout 370:Showing dialog
+12-06 17:18:45 replicate_layout.action_replicate_layout 374:Pcbnew position: wx.Point(-8, -8)
+12-06 17:18:45 replicate_layout.action_replicate_layout 380:Display 0: wx.Rect(-1366, 182, 1366, 768)
+12-06 17:18:45 replicate_layout.action_replicate_layout 380:Display 1: wx.Rect(0, 0, 1920, 1080)
+12-06 17:18:45 replicate_layout.action_replicate_layout 384:Toolbar position: wx.Point(1722, 115)
+12-06 17:18:45 replicate_layout.action_replicate_layout 391:Dialog position: wx.Point(1409, 115)
+12-06 17:18:51 replicate_layout.replicatelayout 238:construcing a list of sheets suitable for replication on level:'Led Stem 1', file:u'LED_Stem.sch'
+12-06 17:18:51 replicate_layout.replicatelayout 245:Sheet ids up to the level:['Led Stem 1']
+12-06 17:18:51 replicate_layout.replicatelayout 249:Footprints on the sheets:
+[u'D2', u'D6', u'D10', u'D14', u'D18', u'D22']
+12-06 17:18:51 replicate_layout.replicatelayout 252:Footprints raw sheet ids:
+[u'/5DCE640D/5DCE9B66', u'/5DD08BF1/5DCE9B66', u'/5DD09BFC/5DCE9B66', u'/5DD0ACE2/5DCE9B66', u'/5DD0BF7E/5DCE9B66', u'/5DD0D430/5DCE9B66']
+12-06 17:18:51 replicate_layout.replicatelayout 268:All sheets to replicate:
+[['Led Stem 1'], ['Stem 2'], ['Stem 3'], ['Stem 4'], ['Stem 5'], ['Stem 6']]
+12-06 17:18:51 replicate_layout.replicatelayout 273:All sheets to replicate sorted:
+[['Led Stem 1'], ['Stem 2'], ['Stem 3'], ['Stem 4'], ['Stem 5'], ['Stem 6']]
+12-06 17:18:51 replicate_layout.replicatelayout 279:All sheets to replicate sorted and without pivot_sheet:
+[['Stem 2'], ['Stem 3'], ['Stem 4'], ['Stem 5'], ['Stem 6']]
+12-06 17:18:57 replicate_layout.replicatelayout 238:construcing a list of sheets suitable for replication on level:'Led Stem 1', file:u'LED_Stem.sch'
+12-06 17:18:57 replicate_layout.replicatelayout 245:Sheet ids up to the level:['Led Stem 1']
+12-06 17:18:57 replicate_layout.replicatelayout 249:Footprints on the sheets:
+[u'D2', u'D6', u'D10', u'D14', u'D18', u'D22']
+12-06 17:18:57 replicate_layout.replicatelayout 252:Footprints raw sheet ids:
+[u'/5DCE640D/5DCE9B66', u'/5DD08BF1/5DCE9B66', u'/5DD09BFC/5DCE9B66', u'/5DD0ACE2/5DCE9B66', u'/5DD0BF7E/5DCE9B66', u'/5DD0D430/5DCE9B66']
+12-06 17:18:57 replicate_layout.replicatelayout 268:All sheets to replicate:
+[['Led Stem 1'], ['Stem 2'], ['Stem 3'], ['Stem 4'], ['Stem 5'], ['Stem 6']]
+12-06 17:18:57 replicate_layout.replicatelayout 273:All sheets to replicate sorted:
+[['Led Stem 1'], ['Stem 2'], ['Stem 3'], ['Stem 4'], ['Stem 5'], ['Stem 6']]
+12-06 17:18:57 replicate_layout.replicatelayout 279:All sheets to replicate sorted and without pivot_sheet:
+[['Stem 2'], ['Stem 3'], ['Stem 4'], ['Stem 5'], ['Stem 6']]
+12-06 17:18:57 replicate_layout.action_replicate_layout 170:Replicating layout
+12-06 17:18:58 replicate_layout.replicatelayout 959:Starting replication of sheets: [['Stem 2'], ['Stem 3'], ['Stem 4'], ['Stem 5'], ['Stem 6']]
+on level: ['Led Stem 1']
+with tracks=True, zone=True, text=True, containing=True, remov=False
+12-06 17:18:58 root 250:updating GUI message: 'Preparing for replication'
+12-06 17:18:58 root 255:updating GUI with: 0
+12-06 17:18:58 replicate_layout.replicatelayout 534:Getting the list of pivot footprints
+12-06 17:18:58 root 255:updating GUI with: 0
+12-06 17:18:58 replicate_layout.replicatelayout 538:Getting the list of all the remaining footprints
+12-06 17:18:58 replicate_layout.replicatelayout 542:Getting nets local to pivot footprints
+12-06 17:18:58 replicate_layout.replicatelayout 546:Getting pivot bounding box
+12-06 17:18:58 root 255:updating GUI with: 37
+12-06 17:18:58 replicate_layout.replicatelayout 550:Getting pivot tracks
+12-06 17:18:58 replicate_layout.replicatelayout 554:Getting pivot zones
+12-06 17:18:58 replicate_layout.replicatelayout 558:Getting pivot text items
+12-06 17:18:58 replicate_layout.replicatelayout 562:Getting pivot text items
+12-06 17:18:58 root 250:updating GUI message: 'Replicating footprints'
+12-06 17:18:58 replicate_layout.replicatelayout 568:Replicating footprints
+12-06 17:18:58 root 255:updating GUI with: 0
+12-06 17:18:58 replicate_layout.replicatelayout 574:Replicating footprints on sheet ['Stem 2']
+12-06 17:18:58 root 255:updating GUI with: 15
+12-06 17:18:58 replicate_layout.replicatelayout 574:Replicating footprints on sheet ['Stem 3']
+12-06 17:18:58 root 255:updating GUI with: 30
+12-06 17:18:58 root 255:updating GUI with: 40
+12-06 17:18:58 replicate_layout.replicatelayout 574:Replicating footprints on sheet ['Stem 4']
+12-06 17:18:58 root 255:updating GUI with: 60
+12-06 17:18:58 root 255:updating GUI with: 60
+12-06 17:18:58 replicate_layout.replicatelayout 574:Replicating footprints on sheet ['Stem 5']
+12-06 17:18:58 root 255:updating GUI with: 80
+12-06 17:18:58 root 255:updating GUI with: 80
+12-06 17:18:58 replicate_layout.replicatelayout 574:Replicating footprints on sheet ['Stem 6']
+12-06 17:18:58 root 255:updating GUI with: 95
+12-06 17:18:58 root 250:updating GUI message: 'Replicating tracks'
+12-06 17:18:58 root 255:updating GUI with: 0
+12-06 17:18:58 replicate_layout.replicatelayout 687:Replicating tracks
+12-06 17:18:58 replicate_layout.replicatelayout 693:Replicating tracks on sheet ['Stem 2']
+12-06 17:18:58 root 255:updating GUI with: 20
+12-06 17:18:58 replicate_layout.replicatelayout 693:Replicating tracks on sheet ['Stem 3']
+12-06 17:18:58 replicate_layout.replicatelayout 693:Replicating tracks on sheet ['Stem 4']
+12-06 17:18:58 replicate_layout.replicatelayout 693:Replicating tracks on sheet ['Stem 5']
+12-06 17:18:58 root 255:updating GUI with: 80
+12-06 17:18:58 replicate_layout.replicatelayout 693:Replicating tracks on sheet ['Stem 6']
+12-06 17:18:58 root 250:updating GUI message: 'Replicating zones'
+12-06 17:18:58 replicate_layout.replicatelayout 738:Replicating zones
+12-06 17:18:58 root 255:updating GUI with: 0
+12-06 17:18:58 replicate_layout.replicatelayout 745:Replicating zones on sheet ['Stem 2']
+12-06 17:18:58 root 255:updating GUI with: 20
+12-06 17:18:58 replicate_layout.replicatelayout 745:Replicating zones on sheet ['Stem 3']
+12-06 17:18:58 replicate_layout.replicatelayout 745:Replicating zones on sheet ['Stem 4']
+12-06 17:18:58 replicate_layout.replicatelayout 745:Replicating zones on sheet ['Stem 5']
+12-06 17:18:58 root 255:updating GUI with: 80
+12-06 17:18:58 replicate_layout.replicatelayout 745:Replicating zones on sheet ['Stem 6']
+12-06 17:18:58 root 250:updating GUI message: 'Replicating text'
+12-06 17:18:58 replicate_layout.replicatelayout 804:Replicating text
+12-06 17:18:58 root 255:updating GUI with: 0
+12-06 17:18:58 replicate_layout.replicatelayout 811:Replicating text on sheet ['Stem 2']
+12-06 17:18:58 replicate_layout.replicatelayout 811:Replicating text on sheet ['Stem 3']
+12-06 17:18:58 replicate_layout.replicatelayout 811:Replicating text on sheet ['Stem 4']
+12-06 17:18:58 replicate_layout.replicatelayout 811:Replicating text on sheet ['Stem 5']
+12-06 17:18:58 replicate_layout.replicatelayout 811:Replicating text on sheet ['Stem 6']
+12-06 17:18:58 root 250:updating GUI message: 'Replicating drawings'
+12-06 17:18:58 replicate_layout.replicatelayout 834:Replicating drawings
+12-06 17:18:58 root 255:updating GUI with: 0
+12-06 17:18:58 replicate_layout.replicatelayout 840:Replicating drawings on sheet ['Stem 2']
+12-06 17:18:58 replicate_layout.replicatelayout 840:Replicating drawings on sheet ['Stem 3']
+12-06 17:18:58 replicate_layout.replicatelayout 840:Replicating drawings on sheet ['Stem 4']
+12-06 17:18:58 replicate_layout.replicatelayout 840:Replicating drawings on sheet ['Stem 5']
+12-06 17:18:58 replicate_layout.replicatelayout 840:Replicating drawings on sheet ['Stem 6']
+12-06 17:18:58 replicate_layout.action_replicate_layout 190:Replication complete
