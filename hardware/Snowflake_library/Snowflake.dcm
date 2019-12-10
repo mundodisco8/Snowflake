@@ -55,4 +55,10 @@ K R resistor
 F ~
 $ENDCMP
 #
+$CMP TL431D
+D Shunt Regulator, SO-8
+K diode device shunt regulator
+F http://www.ti.com/lit/ds/symlink/tl431.pdf
+$ENDCMP
+#
 #End Doc Library

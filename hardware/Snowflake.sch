@@ -24,6 +24,7 @@ F0 "Led Stem 1" 50
 F1 "LED_Stem.sch" 50
 F2 "VLED0" I L 1050 5000 50 
 F3 "VLED1" I L 1050 5100 50 
+F4 "VK" I L 1050 5350 50 
 $EndSheet
 Wire Wire Line
 	950  5100 1050 5100
@@ -153,122 +154,98 @@ VBAT
 $Comp
 L Snowflake:R_Small R2
 U 1 1 5DE85FD7
-P 2850 1750
-F 0 "R2" H 2909 1796 50  0000 L CNN
-F 1 "35kΩ" H 2909 1705 50  0000 L CNN
-F 2 "Snowflake:0805-R_Handsolder" H 2850 1750 50  0001 C CNN
-F 3 "~" H 2850 1750 50  0001 C CNN
-	1    2850 1750
+P 3275 1725
+F 0 "R2" H 3334 1771 50  0000 L CNN
+F 1 "35kΩ" H 3334 1680 50  0000 L CNN
+F 2 "Snowflake:0805-R_Handsolder" H 3275 1725 50  0001 C CNN
+F 3 "~" H 3275 1725 50  0001 C CNN
+	1    3275 1725
 	1    0    0    -1  
 $EndComp
 $Comp
 L Snowflake:R_Small R3
 U 1 1 5DE866ED
-P 2850 2150
-F 0 "R3" H 2909 2196 50  0000 L CNN
-F 1 "30kΩ" H 2909 2105 50  0000 L CNN
-F 2 "Snowflake:0805-R_Handsolder" H 2850 2150 50  0001 C CNN
-F 3 "~" H 2850 2150 50  0001 C CNN
-	1    2850 2150
+P 3275 2125
+F 0 "R3" H 3334 2171 50  0000 L CNN
+F 1 "30kΩ" H 3334 2080 50  0000 L CNN
+F 2 "Snowflake:0805-R_Handsolder" H 3275 2125 50  0001 C CNN
+F 3 "~" H 3275 2125 50  0001 C CNN
+	1    3275 2125
 	1    0    0    -1  
 $EndComp
 $Comp
 L Snowflake:R_Small R1
 U 1 1 5DE86C13
-P 2250 1000
-F 0 "R1" V 2054 1000 50  0000 C CNN
-F 1 "50kΩ" V 2145 1000 50  0000 C CNN
-F 2 "Snowflake:0805-R_Handsolder" H 2250 1000 50  0001 C CNN
-F 3 "~" H 2250 1000 50  0001 C CNN
-	1    2250 1000
+P 2675 975
+F 0 "R1" V 2479 975 50  0000 C CNN
+F 1 "50kΩ" V 2570 975 50  0000 C CNN
+F 2 "Snowflake:0805-R_Handsolder" H 2675 975 50  0001 C CNN
+F 3 "~" H 2675 975 50  0001 C CNN
+	1    2675 975 
 	0    1    1    0   
 $EndComp
 $Comp
 L felcana:C_Small C1
 U 1 1 5DE87959
-P 1650 1850
-F 0 "C1" H 1742 1948 50  0000 L CNN
-F 1 "C_Small" H 1742 1857 50  0000 L CNN
-F 2 "Snowflake:0805-C_Handsolder" H 1650 1850 50  0001 C CNN
-F 3 "~" H 1650 1850 50  0001 C CNN
-F 4 "Temp_Coef" H 1742 1785 25  0000 L CNN "TempCoef"
-F 5 "Vrating" H 1742 1733 25  0000 L CNN "VRating"
-	1    1650 1850
+P 2075 1825
+F 0 "C1" H 2167 1923 50  0000 L CNN
+F 1 "C_Small" H 2167 1832 50  0000 L CNN
+F 2 "Snowflake:0805-C_Handsolder" H 2075 1825 50  0001 C CNN
+F 3 "~" H 2075 1825 50  0001 C CNN
+F 4 "Temp_Coef" H 2167 1760 25  0000 L CNN "TempCoef"
+F 5 "Vrating" H 2167 1708 25  0000 L CNN "VRating"
+	1    2075 1825
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2750 1500 2850 1500
+	3175 1475 3275 1475
 Wire Wire Line
-	2850 1500 2850 1000
-Connection ~ 2850 1500
+	3275 1475 3275 975 
+Connection ~ 3275 1475
 Wire Wire Line
-	2850 1500 3000 1500
+	3275 1475 3425 1475
 Wire Wire Line
-	1650 1400 2150 1400
+	2075 1375 2575 1375
 Wire Wire Line
-	1650 1400 1650 1750
-Connection ~ 1650 1400
+	2075 1375 2075 1725
+Connection ~ 2075 1375
 Wire Wire Line
-	2150 1600 2050 1600
+	2575 1575 2475 1575
 Wire Wire Line
-	2050 1600 2050 1950
+	2475 1575 2475 1925
 Wire Wire Line
-	2050 1950 2850 1950
+	2475 1925 3275 1925
 Wire Wire Line
-	2850 1500 2850 1650
+	3275 1475 3275 1625
 Wire Wire Line
-	2850 1850 2850 1950
+	3275 1825 3275 1925
 Wire Wire Line
-	2850 1950 2850 2050
-Connection ~ 2850 1950
+	3275 1925 3275 2025
+Connection ~ 3275 1925
 Wire Wire Line
-	2850 2250 2850 2350
+	3275 2225 3275 2325
 $Comp
 L Snowflake:R_POT_Small RV1
 U 1 1 5DE8F84F
-P 1650 1200
-F 0 "RV1" H 1590 1246 50  0000 R CNN
-F 1 "200kΩ" H 1590 1155 50  0000 R CNN
-F 2 "Snowflake:Potentiometer_TC33X-2-204E" H 1650 1200 50  0001 C CNN
-F 3 "https://www.bourns.com/docs/Product-Datasheets/TC33.pdf" H 1650 1200 50  0001 C CNN
-	1    1650 1200
+P 2075 1175
+F 0 "RV1" H 2015 1221 50  0000 R CNN
+F 1 "200kΩ" H 2015 1130 50  0000 R CNN
+F 2 "Snowflake:Potentiometer_TC33X-2-204E" H 2075 1175 50  0001 C CNN
+F 3 "https://www.bourns.com/docs/Product-Datasheets/TC33.pdf" H 2075 1175 50  0001 C CNN
+	1    2075 1175
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1650 1300 1650 1400
+	2075 1275 2075 1375
 Wire Wire Line
-	2350 1000 2850 1000
+	2775 975  3275 975 
 Wire Wire Line
-	1650 1950 1650 2050
-$Comp
-L power:GND #PWR0101
-U 1 1 5DE9A0B6
-P 2850 2350
-F 0 "#PWR0101" H 2850 2100 50  0001 C CNN
-F 1 "GND" H 2855 2177 50  0000 C CNN
-F 2 "" H 2850 2350 50  0001 C CNN
-F 3 "" H 2850 2350 50  0001 C CNN
-	1    2850 2350
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR0102
-U 1 1 5DE9A498
-P 1650 2050
-F 0 "#PWR0102" H 1650 1800 50  0001 C CNN
-F 1 "GND" H 1655 1877 50  0000 C CNN
-F 2 "" H 1650 2050 50  0001 C CNN
-F 3 "" H 1650 2050 50  0001 C CNN
-	1    1650 2050
-	1    0    0    -1  
-$EndComp
+	2175 1175 2275 1175
 Wire Wire Line
-	1750 1200 1850 1200
+	2275 1175 2275 975 
 Wire Wire Line
-	1850 1200 1850 1000
-Wire Wire Line
-	1850 1000 2150 1000
-Text GLabel 3000 1500 2    50   Input ~ 0
+	2275 975  2575 975 
+Text GLabel 3425 1475 2    50   Input ~ 0
 CLK
 Text GLabel 4300 1150 0    50   Input ~ 0
 CLK
@@ -421,8 +398,8 @@ $EndComp
 Wire Wire Line
 	8000 1500 8000 1600
 Wire Wire Line
-	1650 1100 1650 1000
-NoConn ~ 1650 1000
+	2075 1075 2075 975 
+NoConn ~ 2075 975 
 Text GLabel 6750 1600 0    50   Input ~ 0
 V1
 Wire Wire Line
@@ -456,20 +433,20 @@ Centre LED\n
 $Comp
 L power:GND #PWR0109
 U 1 1 5DEB46EF
-P 900 1850
-F 0 "#PWR0109" H 900 1600 50  0001 C CNN
-F 1 "GND" H 905 1677 50  0000 C CNN
-F 2 "" H 900 1850 50  0001 C CNN
-F 3 "" H 900 1850 50  0001 C CNN
-	1    900  1850
+P 650 1950
+F 0 "#PWR0109" H 650 1700 50  0001 C CNN
+F 1 "GND" H 655 1777 50  0000 C CNN
+F 2 "" H 650 1950 50  0001 C CNN
+F 3 "" H 650 1950 50  0001 C CNN
+	1    650  1950
 	1    0    0    -1  
 $EndComp
-Text GLabel 900  1050 1    50   Input ~ 0
+Text GLabel 650  1150 1    50   Input ~ 0
 VBAT
 Wire Wire Line
-	900  1150 900  1050
+	650  1250 650  1150
 Wire Wire Line
-	900  1850 900  1750
+	650  1950 650  1850
 Wire Notes Line
 	500  4000 3700 4000
 Wire Notes Line
@@ -483,23 +460,23 @@ Wire Notes Line
 $Comp
 L Snowflake:Opamp_Single_MCP6001 U1
 U 1 1 5DEBF37F
-P 2450 1500
-F 0 "U1" H 2450 1867 50  0000 C CNN
-F 1 "Opamp_Single" H 2450 1776 50  0000 C CNN
-F 2 "Snowflake:Op_Amp_SOT23_MCP6001T" H 2450 1500 50  0001 C CNN
-F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/20001733K.pdf" H 2450 1500 50  0001 C CNN
-	1    2450 1500
-	1    0    0    -1  
+P 2875 1475
+F 0 "U1" H 2875 1842 50  0000 C CNN
+F 1 "Opamp_Single" H 2875 1751 50  0000 C CNN
+F 2 "Snowflake:Op_Amp_SOT23_MCP6001T" H 2875 1475 50  0001 C CNN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/20001733K.pdf" H 2875 1475 50  0001 C CNN
+	1    2875 1475
+	1    0    0    1   
 $EndComp
 $Comp
 L Snowflake:Opamp_Single_MCP6001 U1
 U 2 1 5DEBF9DB
-P 900 1450
-F 0 "U1" H 958 1496 50  0000 L CNN
-F 1 "Opamp_Single" H 958 1405 50  0000 L CNN
-F 2 "Snowflake:Op_Amp_SOT23_MCP6001T" H 900 1450 50  0001 C CNN
-F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/20001733K.pdf" H 900 1450 50  0001 C CNN
-	2    900  1450
+P 650 1550
+F 0 "U1" H 708 1596 50  0000 L CNN
+F 1 "Opamp_Single" H 708 1505 50  0000 L CNN
+F 2 "Snowflake:Op_Amp_SOT23_MCP6001T" H 650 1550 50  0001 C CNN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/20001733K.pdf" H 650 1550 50  0001 C CNN
+	2    650  1550
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -526,4 +503,76 @@ F 3 "" H 9850 1550 50  0001 C CNN
 $EndComp
 Wire Notes Line
 	3700 4000 3700 500 
+$Comp
+L Snowflake:TL431D U?
+U 1 1 5DEF05F4
+P 1425 1700
+F 0 "U?" V 1471 1630 50  0000 R CNN
+F 1 "LM4041_1.2V" V 1380 1630 50  0000 R CNN
+F 2 "Snowflake:SOT-23_LM4041_1.2V_Handsolder" H 1425 1450 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/LM4040-41-Precision-Micropower-Shunt-Voltage-Reference-DS20005757B.pdf" H 1425 1700 50  0001 C CIN
+	1    1425 1700
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Snowflake:R_Small R?
+U 1 1 5DEF1C7E
+P 1425 1375
+F 0 "R?" H 1484 1421 50  0000 L CNN
+F 1 "6.8kΩ" H 1484 1330 50  0000 L CNN
+F 2 "Snowflake:0805-R_Handsolder" H 1425 1375 50  0001 C CNN
+F 3 "~" H 1425 1375 50  0001 C CNN
+	1    1425 1375
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1325 1700 1275 1700
+Wire Wire Line
+	1275 1700 1275 1550
+Wire Wire Line
+	1425 1550 1425 1600
+Wire Wire Line
+	1425 1550 1425 1475
+Connection ~ 1425 1550
+Wire Wire Line
+	1425 1275 1425 1200
+Wire Wire Line
+	1425 1800 1425 1900
+$Comp
+L power:GND #PWR?
+U 1 1 5DEF7581
+P 1425 1900
+F 0 "#PWR?" H 1425 1650 50  0001 C CNN
+F 1 "GND" H 1430 1727 50  0000 C CNN
+F 2 "" H 1425 1900 50  0001 C CNN
+F 3 "" H 1425 1900 50  0001 C CNN
+	1    1425 1900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1275 1550 1425 1550
+Wire Wire Line
+	1425 1550 1525 1550
+Text GLabel 1525 1550 2    50   Input ~ 0
+VBIAS
+$Comp
+L power:GND #PWR?
+U 1 1 5DEFC3A0
+P 1425 1200
+F 0 "#PWR?" H 1425 950 50  0001 C CNN
+F 1 "GND" H 1430 1027 50  0000 C CNN
+F 2 "" H 1425 1200 50  0001 C CNN
+F 3 "" H 1425 1200 50  0001 C CNN
+	1    1425 1200
+	-1   0    0    1   
+$EndComp
+Text GLabel 1975 2325 0    50   Input ~ 0
+VBIAS
+Wire Wire Line
+	3275 2325 2075 2325
+Wire Wire Line
+	2075 1925 2075 2325
+Wire Wire Line
+	1975 2325 2075 2325
+Connection ~ 2075 2325
 $EndSCHEMATC
