@@ -1,4 +1,5 @@
 EESchema Schematic File Version 4
+LIBS:Snowflake-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -13,103 +14,12 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-Text GLabel 950  5100 0    50   Input ~ 0
-ROW1
 Wire Wire Line
-	1050 5000 950  5000
-$Sheet
-S 1050 4850 1000 650 
-U 5DCE640D
-F0 "Led Stem 1" 50
-F1 "LED_Stem.sch" 50
-F2 "VLED0" I L 1050 5000 50 
-F3 "VLED1" I L 1050 5100 50 
-F4 "VK" I L 1050 5350 50 
-$EndSheet
+	2850 5050 2750 5050
 Wire Wire Line
-	950  5100 1050 5100
-Text GLabel 950  5900 0    50   Input ~ 0
-ROW0
-Text GLabel 950  6000 0    50   Input ~ 0
-ROW1
-Wire Wire Line
-	1050 5900 950  5900
-$Sheet
-S 1050 5750 1000 650 
-U 5DD08BF1
-F0 "Stem 2" 50
-F1 "LED_Stem.sch" 50
-F2 "VLED0" I L 1050 5900 50 
-F3 "VLED1" I L 1050 6000 50 
-$EndSheet
-Wire Wire Line
-	950  6000 1050 6000
-Text GLabel 950  6750 0    50   Input ~ 0
-ROW0
-Text GLabel 950  6850 0    50   Input ~ 0
-ROW1
-Wire Wire Line
-	1050 6750 950  6750
-$Sheet
-S 1050 6600 1000 650 
-U 5DD09BFC
-F0 "Stem 3" 50
-F1 "LED_Stem.sch" 50
-F2 "VLED0" I L 1050 6750 50 
-F3 "VLED1" I L 1050 6850 50 
-$EndSheet
-Wire Wire Line
-	950  6850 1050 6850
-Text GLabel 2450 5000 0    50   Input ~ 0
-ROW0
-Text GLabel 2450 5100 0    50   Input ~ 0
-ROW1
-Wire Wire Line
-	2550 5000 2450 5000
-$Sheet
-S 2550 4850 1000 650 
-U 5DD0ACE2
-F0 "Stem 4" 50
-F1 "LED_Stem.sch" 50
-F2 "VLED0" I L 2550 5000 50 
-F3 "VLED1" I L 2550 5100 50 
-$EndSheet
-Wire Wire Line
-	2450 5100 2550 5100
-Text GLabel 2450 5900 0    50   Input ~ 0
-ROW0
-Text GLabel 2450 6000 0    50   Input ~ 0
-ROW1
-Wire Wire Line
-	2550 5900 2450 5900
-$Sheet
-S 2550 5750 1000 650 
-U 5DD0BF7E
-F0 "Stem 5" 50
-F1 "LED_Stem.sch" 50
-F2 "VLED0" I L 2550 5900 50 
-F3 "VLED1" I L 2550 6000 50 
-$EndSheet
-Wire Wire Line
-	2450 6000 2550 6000
-Text GLabel 2450 6750 0    50   Input ~ 0
-ROW0
-Text GLabel 2450 6850 0    50   Input ~ 0
-ROW1
-Wire Wire Line
-	2550 6750 2450 6750
-$Sheet
-S 2550 6600 1000 650 
-U 5DD0D430
-F0 "Stem 6" 50
-F1 "LED_Stem.sch" 50
-F2 "VLED0" I L 2550 6750 50 
-F3 "VLED1" I L 2550 6850 50 
-$EndSheet
-Wire Wire Line
-	2450 6850 2550 6850
+	2750 5150 2850 5150
 $Comp
-L Device:Battery BT1
+L Snowflake:Battery_Cell BT1
 U 1 1 5DCE8C77
 P 8000 1800
 F 0 "BT1" H 8108 1846 50  0000 L CNN
@@ -122,7 +32,7 @@ $EndComp
 Wire Wire Line
 	8000 1100 8000 1000
 Wire Wire Line
-	8000 2000 8000 2100
+	8000 1900 8000 2100
 $Comp
 L power:GND #PWR0130
 U 1 1 5DCED3CD
@@ -185,7 +95,7 @@ F 3 "~" H 2675 975 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L felcana:C_Small C1
+L Snowflake:C_Small C1
 U 1 1 5DE87959
 P 2075 1825
 F 0 "C1" H 2167 1923 50  0000 L CNN
@@ -280,7 +190,7 @@ P 4950 1550
 F 0 "U2" H 5250 2100 50  0000 C CNN
 F 1 "74HC595" H 5200 1000 40  0000 C CNN
 F 2 "Snowflake:16-TSSOP_5x6.5mm_P0.65-74HC565" H 4900 1700 50  0001 C CNN
-F 3 "" H 4900 1700 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/74HC_HCT595.pdf" H 4900 1700 50  0001 C CNN
 	1    4950 1550
 	1    0    0    -1  
 $EndComp
@@ -299,9 +209,9 @@ Wire Wire Line
 Wire Wire Line
 	4500 1800 4450 1800
 Wire Wire Line
-	5400 1450 5500 1450
+	5400 1450 5800 1450
 Wire Wire Line
-	5400 1550 5500 1550
+	5400 1550 5800 1550
 Wire Wire Line
 	5500 1150 5400 1150
 Wire Wire Line
@@ -336,56 +246,54 @@ Connection ~ 4400 1150
 $Comp
 L Snowflake:LED_Small_ALT D3
 U 1 1 5DE8DAC0
-P 6800 1750
-F 0 "D3" V 6846 1682 50  0000 R CNN
-F 1 "White" V 6755 1682 50  0000 R CNN
-F 2 "Snowflake:0603_LED_HandSolder" V 6800 1750 50  0001 C CNN
-F 3 "~" V 6800 1750 50  0001 C CNN
-	1    6800 1750
+P 7000 1750
+F 0 "D3" V 7046 1682 50  0000 R CNN
+F 1 "White" V 6955 1682 50  0000 R CNN
+F 2 "Snowflake:0603_LED_HandSolder" V 7000 1750 50  0001 C CNN
+F 3 "~" V 7000 1750 50  0001 C CNN
+	1    7000 1750
 	0    -1   -1   0   
 $EndComp
 $Comp
 L Snowflake:R_Small R4
 U 1 1 5DE8E4A3
-P 6800 1450
-F 0 "R4" H 6859 1496 50  0000 L CNN
-F 1 "XYZΩ" H 6859 1405 50  0000 L CNN
-F 2 "Snowflake:0805-R_Handsolder" H 6800 1450 50  0001 C CNN
-F 3 "~" H 6800 1450 50  0001 C CNN
-	1    6800 1450
+P 7000 1450
+F 0 "R4" H 7059 1496 50  0000 L CNN
+F 1 "XYZΩ" H 7059 1405 50  0000 L CNN
+F 2 "Snowflake:0805-R_Handsolder" H 7000 1450 50  0001 C CNN
+F 3 "~" H 7000 1450 50  0001 C CNN
+	1    7000 1450
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR0105
 U 1 1 5DE8EBF3
-P 6800 1950
-F 0 "#PWR0105" H 6800 1700 50  0001 C CNN
-F 1 "GND" H 6805 1777 50  0000 C CNN
-F 2 "" H 6800 1950 50  0001 C CNN
-F 3 "" H 6800 1950 50  0001 C CNN
-	1    6800 1950
+P 7000 1950
+F 0 "#PWR0105" H 7000 1700 50  0001 C CNN
+F 1 "GND" H 7005 1777 50  0000 C CNN
+F 2 "" H 7000 1950 50  0001 C CNN
+F 3 "" H 7000 1950 50  0001 C CNN
+	1    7000 1950
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	6800 1950 6800 1850
+	7000 1950 7000 1850
 Wire Wire Line
-	6800 1650 6800 1600
+	7000 1650 7000 1600
 Wire Wire Line
-	6800 1350 6800 1250
-Text GLabel 6800 1250 1    50   Input ~ 0
+	7000 1350 7000 1250
+Text GLabel 7000 1250 1    50   Input ~ 0
 LED0
-Text GLabel 950  5000 0    50   Input ~ 0
-ROW0
 Text GLabel 5500 1350 2    50   Input ~ 0
 LED0
-Text GLabel 5500 1450 2    50   Input ~ 0
-ROW0
-Text GLabel 5500 1550 2    50   Input ~ 0
-ROW1
-Text GLabel 5500 1550 3    50   Input ~ 0
+Text GLabel 5800 1450 2    50   Input ~ 0
+DRIVE_ROW0
+Text GLabel 5800 1550 2    50   Input ~ 0
+DRIVE_ROW1
+Text GLabel 5700 1550 3    50   Input ~ 0
 RESET
 $Comp
-L Switch:SW_SPST SW1
+L Snowflake:SW_SPST SW1
 U 1 1 5DE9961F
 P 8000 1300
 F 0 "SW1" V 7954 1398 50  0000 L CNN
@@ -400,13 +308,13 @@ Wire Wire Line
 Wire Wire Line
 	2075 1075 2075 975 
 NoConn ~ 2075 975 
-Text GLabel 6750 1600 0    50   Input ~ 0
+Text GLabel 6950 1600 0    50   Input ~ 0
 V1
 Wire Wire Line
-	6750 1600 6800 1600
-Connection ~ 6800 1600
+	6950 1600 7000 1600
+Connection ~ 7000 1600
 Wire Wire Line
-	6800 1600 6800 1550
+	7000 1600 7000 1550
 Wire Wire Line
 	9600 1650 9600 1750
 Wire Wire Line
@@ -428,7 +336,7 @@ Text Notes 1300 3350 0    50   ~ 0
 Astable Multivibrator\nR2 and R3 add some hysteresis to the comparison\nB=R3/R2+R3 and the switching point is +/- B Vdd\n\nThe period of the square signal is\nT = 2RC * ln ( 1+B/1-B)\n\nBy making B so 1+B/1-B is e, \nT = 2RC -> f = 1/2RC
 Text Notes 9400 2300 0    50   ~ 0
 Note: The pins in this part are a little hack \nto use two of the copper arms as conducting\n traces for the centre LED
-Text Notes 6500 1850 1    50   ~ 0
+Text Notes 6700 1850 1    50   ~ 0
 Centre LED\n
 $Comp
 L power:GND #PWR0109
@@ -450,7 +358,7 @@ Wire Wire Line
 Wire Notes Line
 	500  4000 3700 4000
 Wire Notes Line
-	6000 3000 6000 500 
+	6350 3050 6350 550 
 Wire Notes Line
 	7500 3000 7500 500 
 Wire Notes Line
@@ -504,66 +412,38 @@ $EndComp
 Wire Notes Line
 	3700 4000 3700 500 
 $Comp
-L Snowflake:TL431D U?
-U 1 1 5DEF05F4
-P 1425 1700
-F 0 "U?" V 1471 1630 50  0000 R CNN
-F 1 "LM4041_1.2V" V 1380 1630 50  0000 R CNN
-F 2 "Snowflake:SOT-23_LM4041_1.2V_Handsolder" H 1425 1450 50  0001 C CIN
-F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/LM4040-41-Precision-Micropower-Shunt-Voltage-Reference-DS20005757B.pdf" H 1425 1700 50  0001 C CIN
-	1    1425 1700
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Snowflake:R_Small R?
+L Snowflake:R_Small R5
 U 1 1 5DEF1C7E
-P 1425 1375
-F 0 "R?" H 1484 1421 50  0000 L CNN
-F 1 "6.8kΩ" H 1484 1330 50  0000 L CNN
-F 2 "Snowflake:0805-R_Handsolder" H 1425 1375 50  0001 C CNN
-F 3 "~" H 1425 1375 50  0001 C CNN
-	1    1425 1375
+P 1400 1350
+F 0 "R5" H 1459 1396 50  0000 L CNN
+F 1 "6.8kΩ" H 1459 1305 50  0000 L CNN
+F 2 "Snowflake:0805-R_Handsolder" H 1400 1350 50  0001 C CNN
+F 3 "~" H 1400 1350 50  0001 C CNN
+	1    1400 1350
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1325 1700 1275 1700
-Wire Wire Line
-	1275 1700 1275 1550
-Wire Wire Line
-	1425 1550 1425 1600
-Wire Wire Line
-	1425 1550 1425 1475
-Connection ~ 1425 1550
-Wire Wire Line
-	1425 1275 1425 1200
-Wire Wire Line
-	1425 1800 1425 1900
 $Comp
-L power:GND #PWR?
+L power:GND #PWR0101
 U 1 1 5DEF7581
-P 1425 1900
-F 0 "#PWR?" H 1425 1650 50  0001 C CNN
-F 1 "GND" H 1430 1727 50  0000 C CNN
-F 2 "" H 1425 1900 50  0001 C CNN
-F 3 "" H 1425 1900 50  0001 C CNN
-	1    1425 1900
+P 1400 1850
+F 0 "#PWR0101" H 1400 1600 50  0001 C CNN
+F 1 "GND" H 1405 1677 50  0000 C CNN
+F 2 "" H 1400 1850 50  0001 C CNN
+F 3 "" H 1400 1850 50  0001 C CNN
+	1    1400 1850
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1275 1550 1425 1550
-Wire Wire Line
-	1425 1550 1525 1550
-Text GLabel 1525 1550 2    50   Input ~ 0
+Text GLabel 1500 1500 2    50   Input ~ 0
 VBIAS
 $Comp
-L power:GND #PWR?
+L power:GND #PWR0102
 U 1 1 5DEFC3A0
-P 1425 1200
-F 0 "#PWR?" H 1425 950 50  0001 C CNN
-F 1 "GND" H 1430 1027 50  0000 C CNN
-F 2 "" H 1425 1200 50  0001 C CNN
-F 3 "" H 1425 1200 50  0001 C CNN
-	1    1425 1200
+P 1400 1150
+F 0 "#PWR0102" H 1400 900 50  0001 C CNN
+F 1 "GND" H 1405 977 50  0000 C CNN
+F 2 "" H 1400 1150 50  0001 C CNN
+F 3 "" H 1400 1150 50  0001 C CNN
+	1    1400 1150
 	-1   0    0    1   
 $EndComp
 Text GLabel 1975 2325 0    50   Input ~ 0
@@ -575,4 +455,183 @@ Wire Wire Line
 Wire Wire Line
 	1975 2325 2075 2325
 Connection ~ 2075 2325
+$Comp
+L Snowflake:Q_DUAL_NMOS Q1
+U 1 1 5DF11E19
+P 1500 5450
+F 0 "Q1" H 1706 5496 50  0000 L CNN
+F 1 "Q_DUAL_NMOS" H 1706 5405 50  0000 L CNN
+F 2 "Snowflake:SOT-23-6_DMN2004DMK_Handsoldering" H 2250 5300 50  0001 C CNN
+F 3 "~" H 1700 5450 50  0001 C CNN
+	1    1500 5450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Snowflake:Q_DUAL_NMOS Q1
+U 2 1 5DF186F5
+P 1500 6650
+F 0 "Q1" H 1706 6696 50  0000 L CNN
+F 1 "Q_DUAL_NMOS" H 1706 6605 50  0000 L CNN
+F 2 "Snowflake:SOT-23-6_DMN2004DMK_Handsoldering" H 2250 6500 50  0001 C CNN
+F 3 "~" H 1700 6650 50  0001 C CNN
+	2    1500 6650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1600 6450 1600 6350
+Wire Wire Line
+	1600 5650 1600 5750
+Wire Wire Line
+	1600 5250 1600 5150
+Wire Wire Line
+	1300 5450 1200 5450
+Wire Wire Line
+	1300 6650 1200 6650
+Wire Wire Line
+	1600 6850 1600 6950
+$Comp
+L power:GND #PWR0106
+U 1 1 5DF24FA5
+P 1600 5750
+F 0 "#PWR0106" H 1600 5500 50  0001 C CNN
+F 1 "GND" H 1605 5577 50  0000 C CNN
+F 2 "" H 1600 5750 50  0001 C CNN
+F 3 "" H 1600 5750 50  0001 C CNN
+	1    1600 5750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0107
+U 1 1 5DF256CD
+P 1600 6950
+F 0 "#PWR0107" H 1600 6700 50  0001 C CNN
+F 1 "GND" H 1605 6777 50  0000 C CNN
+F 2 "" H 1600 6950 50  0001 C CNN
+F 3 "" H 1600 6950 50  0001 C CNN
+	1    1600 6950
+	1    0    0    -1  
+$EndComp
+Text GLabel 1200 5450 0    50   Input ~ 0
+DRIVE_ROW0
+Text GLabel 1200 6650 0    50   Input ~ 0
+DRIVE_ROW1
+Wire Wire Line
+	2750 6050 2850 6050
+Wire Wire Line
+	2850 5950 2750 5950
+Text GLabel 2750 6050 0    50   Input ~ 0
+ROW1
+Text GLabel 2750 5950 0    50   Input ~ 0
+ROW0
+Wire Wire Line
+	2750 6900 2850 6900
+Wire Wire Line
+	2850 6800 2750 6800
+Text GLabel 2750 6900 0    50   Input ~ 0
+ROW1
+Text GLabel 2750 6800 0    50   Input ~ 0
+ROW0
+Wire Wire Line
+	4250 6900 4350 6900
+Wire Wire Line
+	4350 6800 4250 6800
+Text GLabel 4250 6900 0    50   Input ~ 0
+ROW1
+Text GLabel 4250 6800 0    50   Input ~ 0
+ROW0
+Wire Wire Line
+	4250 6050 4350 6050
+Wire Wire Line
+	4350 5950 4250 5950
+Text GLabel 4250 6050 0    50   Input ~ 0
+ROW1
+Text GLabel 4250 5950 0    50   Input ~ 0
+ROW0
+Wire Wire Line
+	4250 5150 4350 5150
+Wire Wire Line
+	4350 5050 4250 5050
+Text GLabel 4250 5150 0    50   Input ~ 0
+ROW1
+Text GLabel 4250 5050 0    50   Input ~ 0
+ROW0
+Text GLabel 2750 5050 0    50   Input ~ 0
+ROW0
+Text GLabel 2750 5150 0    50   Input ~ 0
+ROW1
+$Sheet
+S 4350 4900 1000 650 
+U 5DD0ACE2
+F0 "Stem 4" 50
+F1 "LED_Stem.sch" 50
+F2 "VLED0" I L 4350 5050 50 
+F3 "VLED1" I L 4350 5150 50 
+$EndSheet
+$Sheet
+S 4350 5800 1000 650 
+U 5DD0BF7E
+F0 "Stem 5" 50
+F1 "LED_Stem.sch" 50
+F2 "VLED0" I L 4350 5950 50 
+F3 "VLED1" I L 4350 6050 50 
+$EndSheet
+$Sheet
+S 4350 6650 1000 650 
+U 5DD0D430
+F0 "Stem 6" 50
+F1 "LED_Stem.sch" 50
+F2 "VLED0" I L 4350 6800 50 
+F3 "VLED1" I L 4350 6900 50 
+$EndSheet
+$Sheet
+S 2850 6650 1000 650 
+U 5DD09BFC
+F0 "Stem 3" 50
+F1 "LED_Stem.sch" 50
+F2 "VLED0" I L 2850 6800 50 
+F3 "VLED1" I L 2850 6900 50 
+$EndSheet
+$Sheet
+S 2850 5800 1000 650 
+U 5DD08BF1
+F0 "Stem 2" 50
+F1 "LED_Stem.sch" 50
+F2 "VLED0" I L 2850 5950 50 
+F3 "VLED1" I L 2850 6050 50 
+$EndSheet
+$Sheet
+S 2850 4900 1000 650 
+U 5DCE640D
+F0 "Led Stem 1" 50
+F1 "LED_Stem.sch" 50
+F2 "VLED0" I L 2850 5050 50 
+F3 "VLED1" I L 2850 5150 50 
+$EndSheet
+Text GLabel 1600 5150 1    50   Input ~ 0
+ROW0
+Text GLabel 1600 6350 1    50   Input ~ 0
+ROW1
+NoConn ~ 1300 1650
+$Comp
+L Snowflake:TL431D U3
+U 1 1 5DEF05F4
+P 1400 1650
+F 0 "U3" V 1446 1580 50  0000 R CNN
+F 1 "LM4041_1.2V" V 1355 1580 50  0000 R CNN
+F 2 "Snowflake:SOT-23_LM4041_1.2V_Handsolder" H 1400 1400 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/LM4040-41-Precision-Micropower-Shunt-Voltage-Reference-DS20005757B.pdf" H 1400 1650 50  0001 C CIN
+	1    1400 1650
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	1400 1850 1400 1750
+Wire Wire Line
+	1400 1550 1400 1500
+Wire Wire Line
+	1400 1500 1500 1500
+Connection ~ 1400 1500
+Wire Wire Line
+	1400 1500 1400 1450
+Wire Wire Line
+	1400 1250 1400 1150
 $EndSCHEMATC

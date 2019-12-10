@@ -8,6 +8,12 @@ $CMP 74HC595
 F https://assets.nexperia.com/documents/data-sheet/74HC_HCT595.pdf
 $ENDCMP
 #
+$CMP Battery_Cell
+D Single-cell battery
+K battery cell
+F ~
+$ENDCMP
+#
 $CMP C_Small
 D Unpolarized capacitor, small symbol
 K capacitor cap
@@ -43,6 +49,12 @@ K dual opamp
 F ~
 $ENDCMP
 #
+$CMP Q_DUAL_NMOS
+D Dual NMOS transistor, 6 pin package
+K transistor NMOS N-MOS N-MOSFET
+F ~
+$ENDCMP
+#
 $CMP R_POT_Small
 D Potentiometer
 K resistor variable
@@ -52,6 +64,12 @@ $ENDCMP
 $CMP R_Small
 D Resistor, small symbol
 K R resistor
+F ~
+$ENDCMP
+#
+$CMP SW_SPST
+D Single Pole Single Throw (SPST) switch
+K switch lever
 F ~
 $ENDCMP
 #

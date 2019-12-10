@@ -1,4 +1,4 @@
-(module 14-SOIC_4x8.75mm_.5-NA556 (layer F.Cu) (tedit 5DCD6999)
+(module 14-SOIC_4x8.75mm_.5-NA556 (layer F.Cu) (tedit 5DEE756A)
   (fp_text reference REF** (at 2.4 5.715) (layer F.SilkS)
     (effects (font (size 0.75 0.75) (thickness 0.15)) (justify right))
   )
@@ -144,4 +144,9 @@
   (pad 12 smd roundrect (at 2.7 -1.27) (size 1.55 0.6) (layers F.Cu F.Paste F.Mask) (roundrect_rratio 0.227))
   (pad 13 smd roundrect (at 2.7 -2.54) (size 1.55 0.6) (layers F.Cu F.Paste F.Mask) (roundrect_rratio 0.227))
   (pad 14 smd roundrect (at 2.7 -3.81) (size 1.55 0.6) (layers F.Cu F.Paste F.Mask) (roundrect_rratio 0.227))
+  (model "${KIPRJMOD}/Snowflake_library/3D_Models/14-SOIC Narrow 4x8.75x1.75mm Pitch 1.27mm v3.step"
+    (at (xyz 0 0 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
 )

@@ -1,9 +1,10 @@
 EESchema Schematic File Version 4
+LIBS:Snowflake-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 2 7
+Sheet 7 7
 Title ""
 Date ""
 Rev ""
@@ -103,14 +104,19 @@ Wire Wire Line
 	2500 2500 2500 2200
 Wire Wire Line
 	2500 3000 2500 3100
-Text HLabel 2000 2200 1    50   Input ~ 0
+Text HLabel 2000 3100 3    50   Input ~ 0
 VLED0
 Wire Wire Line
 	2000 2200 2000 2500
-Text HLabel 2500 2200 1    50   Input ~ 0
-VLED1
-Text HLabel 2000 3100 3    50   Input ~ 0
-VK
 Text HLabel 2500 3100 3    50   Input ~ 0
-VK
+VLED1
+Wire Wire Line
+	2000 2200 2250 2200
+Wire Wire Line
+	2250 2200 2250 2100
+Connection ~ 2250 2200
+Wire Wire Line
+	2250 2200 2500 2200
+Text GLabel 2250 2100 1    50   Input ~ 0
+VBAT
 $EndSCHEMATC
