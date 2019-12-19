@@ -2,7 +2,7 @@
 
   (general
     (thickness 1.6)
-    (drawings 3)
+    (drawings 5)
     (tracks 149)
     (zones 0)
     (modules 41)
@@ -11,7 +11,7 @@
 
   (page A4)
   (layers
-    (0 F.Cu signal)
+    (0 F.Cu signal hide)
     (31 B.Cu signal)
     (32 B.Adhes user)
     (33 F.Adhes user)
@@ -34,7 +34,7 @@
   )
 
   (setup
-    (last_trace_width 0.5)
+    (last_trace_width 0.25)
     (user_trace_width 0.25)
     (user_trace_width 0.5)
     (trace_clearance 0.2)
@@ -7673,6 +7673,12 @@
     (pad "" np_thru_hole circle (at 0 0) (size 2.1 2.1) (drill 2.1) (layers *.Cu *.Mask))
   )
 
+  (gr_text "DRC: Can't internally \nconnect this pins" (at 106.7 84.6) (layer Eco1.User) (tstamp 5DF20E9A)
+    (effects (font (size 0.25 0.25) (thickness 0.0625)))
+  )
+  (gr_text "DRC: Can't internally \nconnect this pins" (at 119.8 105) (layer Eco1.User)
+    (effects (font (size 0.25 0.25) (thickness 0.0625)))
+  )
   (gr_line (start 85.74 106.01) (end 102.04 115.41) (layer Eco1.User) (width 0.12) (tstamp 5DF4CE45))
   (gr_line (start 76.359361 109.856214) (end 92.65 100.44) (layer B.SilkS) (width 0.12) (tstamp 5DF495A3))
   (gr_line (start 90.34 103.27) (end 106.64 112.67) (layer Eco1.User) (width 0.12))

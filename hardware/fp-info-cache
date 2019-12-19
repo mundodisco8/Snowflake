@@ -1,4 +1,4 @@
-3056076886996761
+3057653031932512
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -12147,6 +12147,13 @@ Battery_Holder-AAA
 Snowflake
 Battery_Holder_AA
 Small Footprint double AA holder, MDP BC32AAW
+
+0
+2
+2
+Snowflake
+Jumper-0805
+
 
 0
 2
