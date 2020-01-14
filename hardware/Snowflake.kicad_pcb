@@ -1,8 +1,8 @@
-(kicad_pcb (version 20171130) (host pcbnew "(5.1.4)-1")
+(kicad_pcb (version 20171130) (host pcbnew "(5.1.0)-1")
 
   (general
     (thickness 1.6)
-    (drawings 4)
+    (drawings 1)
     (tracks 227)
     (zones 0)
     (modules 41)
@@ -12,7 +12,7 @@
   (page A4)
   (layers
     (0 F.Cu signal hide)
-    (31 B.Cu signal)
+    (31 B.Cu signal hide)
     (32 B.Adhes user)
     (33 F.Adhes user)
     (34 B.Paste user)
@@ -34,7 +34,7 @@
   )
 
   (setup
-    (last_trace_width 0.5)
+    (last_trace_width 0.25)
     (user_trace_width 0.25)
     (user_trace_width 0.35)
     (user_trace_width 0.5)
@@ -63,7 +63,7 @@
     (pad_to_mask_clearance 0.05)
     (aux_axis_origin 130 117)
     (grid_origin 130 117)
-    (visible_elements 7FFEFFFF)
+    (visible_elements 7FFFFFFF)
     (pcbplotparams
       (layerselection 0x010fc_ffffffff)
       (usegerberextensions false)
@@ -428,7 +428,7 @@
     (at 99.940039 99.476711 60)
     (path /5DD0D430/5DCE9B66)
     (attr smd)
-    (fp_text reference D22 (at 0 1.3 60) (layer F.SilkS)
+    (fp_text reference D22 (at 0 1.3 60) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.15)))
     )
     (fp_text value White (at 0 -1.700001 60) (layer F.Fab)
@@ -6514,7 +6514,7 @@
     (at 130 99)
     (path /5DCE640D/5DCE67D4)
     (attr smd)
-    (fp_text reference D1 (at 0 1.3) (layer F.SilkS)
+    (fp_text reference D1 (at 0 1.3) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.15)))
     )
     (fp_text value White (at 0 -1.7) (layer F.Fab)
@@ -6550,7 +6550,7 @@
     (at 130 82)
     (path /5DCE640D/5DCE9B66)
     (attr smd)
-    (fp_text reference D2 (at 0 1.3) (layer F.SilkS)
+    (fp_text reference D2 (at 0 1.3) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.15)))
     )
     (fp_text value White (at 0 -1.7) (layer F.Fab)
@@ -6586,7 +6586,7 @@
     (at 130 117)
     (path /5DE8DAC0)
     (attr smd)
-    (fp_text reference D3 (at 0 1.3) (layer F.SilkS)
+    (fp_text reference D3 (at 0 1.3) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.15)))
     )
     (fp_text value White (at 0 -1.7) (layer F.Fab)
@@ -6622,7 +6622,7 @@
     (at 145.365938 107.948363 300)
     (path /5DD08BF1/5DCE67D4)
     (attr smd)
-    (fp_text reference D5 (at 0 1.3 300) (layer F.SilkS)
+    (fp_text reference D5 (at 0 1.3 300) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.15)))
     )
     (fp_text value White (at 0 -1.700001 300) (layer F.Fab)
@@ -6658,7 +6658,7 @@
     (at 160.08837 99.448363 300)
     (path /5DD08BF1/5DCE9B66)
     (attr smd)
-    (fp_text reference D6 (at 0 1.3 300) (layer F.SilkS)
+    (fp_text reference D6 (at 0 1.3 300) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.15)))
     )
     (fp_text value White (at 0 -1.700001 300) (layer F.Fab)
@@ -6694,7 +6694,7 @@
     (at 145.240937 126.198362 240)
     (path /5DD09BFC/5DCE67D4)
     (attr smd)
-    (fp_text reference D9 (at 0 1.3 240) (layer F.SilkS)
+    (fp_text reference D9 (at 0 1.3 240) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.15)))
     )
     (fp_text value White (at 0 -1.700001 240) (layer F.Fab)
@@ -6730,7 +6730,7 @@
     (at 159.963369 134.698362 240)
     (path /5DD09BFC/5DCE9B66)
     (attr smd)
-    (fp_text reference D10 (at 0 1.3 240) (layer F.SilkS)
+    (fp_text reference D10 (at 0 1.3 240) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.15)))
     )
     (fp_text value White (at 0 -1.700001 240) (layer F.Fab)
@@ -6766,7 +6766,7 @@
     (at 130 135 180)
     (path /5DD0ACE2/5DCE67D4)
     (attr smd)
-    (fp_text reference D13 (at 0 1.3 180) (layer F.SilkS)
+    (fp_text reference D13 (at 0 1.3 180) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.15)))
     )
     (fp_text value White (at 0 -1.7 180) (layer F.Fab)
@@ -6802,7 +6802,7 @@
     (at 130 152 180)
     (path /5DD0ACE2/5DCE9B66)
     (attr smd)
-    (fp_text reference D14 (at 0 1.3 180) (layer F.SilkS)
+    (fp_text reference D14 (at 0 1.3 180) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.15)))
     )
     (fp_text value White (at 0 -1.7 180) (layer F.Fab)
@@ -6838,7 +6838,7 @@
     (at 114.612472 125.976713 120)
     (path /5DD0BF7E/5DCE67D4)
     (attr smd)
-    (fp_text reference D17 (at 0 1.3 120) (layer F.SilkS)
+    (fp_text reference D17 (at 0 1.3 120) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.15)))
     )
     (fp_text value White (at 0 -1.700001 120) (layer F.Fab)
@@ -6874,7 +6874,7 @@
     (at 99.89004 134.476713 120)
     (path /5DD0BF7E/5DCE9B66)
     (attr smd)
-    (fp_text reference D18 (at 0 1.3 120) (layer F.SilkS)
+    (fp_text reference D18 (at 0 1.3 120) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.15)))
     )
     (fp_text value White (at 0 -1.700001 120) (layer F.Fab)
@@ -6910,7 +6910,7 @@
     (at 114.662471 107.976711 60)
     (path /5DD0D430/5DCE67D4)
     (attr smd)
-    (fp_text reference D21 (at 0 1.3 60) (layer F.SilkS)
+    (fp_text reference D21 (at 0 1.3 60) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.15)))
     )
     (fp_text value White (at 0 -1.700001 60) (layer F.Fab)
@@ -7653,7 +7653,7 @@
     (tags "mounting hole 3.2mm no annular m3")
     (path /5DF39162)
     (attr virtual)
-    (fp_text reference H1 (at 0 -4.2) (layer F.SilkS)
+    (fp_text reference H1 (at 0 -4.2) (layer F.SilkS) hide
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_text value MountingHole (at 0 4.2) (layer F.Fab)
@@ -7667,9 +7667,6 @@
     (pad "" np_thru_hole circle (at 0 0) (size 2.1 2.1) (drill 2.1) (layers *.Cu *.Mask))
   )
 
-  (target plus (at 130 117.9) (size 5) (width 0.05) (layer Edge.Cuts) (tstamp 5E20AA33))
-  (target plus (at 130 117.9) (size 5) (width 0.05) (layer Edge.Cuts) (tstamp 5E20AA32))
-  (target plus (at 130 117.9) (size 5) (width 0.05) (layer Edge.Cuts))
   (gr_circle (center 137.712474 154.776712) (end 138.977384 154.776712) (layer F.Fab) (width 0.5) (tstamp 5E1F2994))
 
   (segment (start 129.512474 105.512474) (end 129.512474 103.576711) (width 0.5) (layer B.Cu) (net 1))
