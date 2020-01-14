@@ -358,7 +358,7 @@ Wire Wire Line
 Wire Notes Line
 	500  4000 3700 4000
 Wire Notes Line
-	6350 3000 6350 500 
+	6350 3050 6350 550 
 Wire Notes Line
 	7500 3000 7500 500 
 Wire Notes Line
@@ -635,55 +635,33 @@ Wire Wire Line
 Wire Wire Line
 	1400 1250 1400 1150
 $Comp
-L Snowflake:Jumper J1
-U 1 1 5DF2400A
-P 9950 4150
-F 0 "J1" H 10050 4200 50  0000 L CNN
-F 1 "0" H 10020 4105 50  0000 L CNN
-F 2 "Snowflake:Jumper-0805" V 9880 4150 50  0001 C CNN
-F 3 "~" H 9950 4150 50  0001 C CNN
-	1    9950 4150
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	9950 3900 9950 4000
-Wire Wire Line
-	9950 4400 9950 4300
-$Comp
-L power:GND #PWR0110
-U 1 1 5DF28486
-P 9950 3900
-F 0 "#PWR0110" H 9950 3650 50  0001 C CNN
-F 1 "GND" H 9955 3727 50  0000 C CNN
-F 2 "" H 9950 3900 50  0001 C CNN
-F 3 "" H 9950 3900 50  0001 C CNN
-	1    9950 3900
-	-1   0    0    1   
-$EndComp
-$Comp
-L power:GND #PWR0111
-U 1 1 5DF28908
-P 9950 4400
-F 0 "#PWR0111" H 9950 4150 50  0001 C CNN
-F 1 "GND" H 9955 4227 50  0000 C CNN
-F 2 "" H 9950 4400 50  0001 C CNN
-F 3 "" H 9950 4400 50  0001 C CNN
-	1    9950 4400
-	1    0    0    -1  
-$EndComp
-$Comp
 L Snowflake:MountingHole H1
 U 1 1 5DF39162
-P 9900 3450
-F 0 "H1" H 10000 3496 50  0000 L CNN
-F 1 "MountingHole" H 10000 3400 50  0000 L CNN
-F 2 "Snowflake:MountingHole_2.1mm_M2" H 9900 3450 50  0001 C CNN
-F 3 "~" H 9900 3450 50  0001 C CNN
-	1    9900 3450
+P 9900 4150
+F 0 "H1" H 10000 4196 50  0000 L CNN
+F 1 "MountingHole" H 10000 4105 50  0000 L CNN
+F 2 "Snowflake:MountingHole_2.1mm_M2" H 9900 4150 50  0001 C CNN
+F 3 "~" H 9900 4150 50  0001 C CNN
+	1    9900 4150
 	1    0    0    -1  
 $EndComp
-Text Notes 9700 3300 0    100  ~ 20
-Miscellanea
-Text Notes 10100 4000 0    50   ~ 0
-Bridge next to the NMOSes \nas the ground plane was \nnot connected there
+$Comp
+L Snowflake:Jumper J1
+U 1 1 5E1E167F
+P 9300 4150
+F 0 "J1" V 9254 4219 50  0000 L CNN
+F 1 "Jumper" V 9345 4219 50  0000 L CNN
+F 2 "Snowflake:Jumper-0805" H 9300 4150 50  0001 C CNN
+F 3 "" H 9300 4150 50  0001 C CNN
+	1    9300 4150
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	9300 4000 9300 3900
+Wire Wire Line
+	9300 4300 9300 4400
+Text GLabel 9300 4400 3    50   Input ~ 0
+ROW0
+Text GLabel 9300 3900 1    50   Input ~ 0
+ROW0
 $EndSCHEMATC

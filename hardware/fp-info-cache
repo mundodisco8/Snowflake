@@ -1,4 +1,4 @@
-3057653031932512
+3093976149087933
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -272,6 +272,167 @@ battery CR-3032 coin cell vertical
 0
 2
 2
+Calavera
+0805-C_Handsolder
+
+
+0
+2
+2
+Calavera
+0805-R_Handsolder
+
+
+0
+2
+2
+Calavera
+CR2032_Multicomp_MP000357
+
+
+0
+3
+2
+Calavera
+CR2032_Multicomp_MP000357_Alternative
+
+
+0
+3
+2
+Calavera
+Calavera_Board_Margins
+
+
+0
+0
+0
+Calavera
+Calavera_Complete_Border
+A complete SVG Import, to make handier picking stuff and moving it to other components
+
+0
+0
+0
+Calavera
+Calavera_Complete_No_border
+
+
+0
+0
+0
+Calavera
+Calavera_SilkScreen
+Silkscreen for the Sugar Skull, painted areas are silkscreen
+
+0
+0
+0
+Calavera
+Calavera_SilkScreen_1200dpi
+
+
+0
+0
+0
+Calavera
+Calavera_Solder
+SolderMask Openings for the Sugar Skull, painted areas show golden copper
+
+0
+0
+0
+Calavera
+Calavera_SolderMask_1200dpi_Border
+
+
+0
+0
+0
+Calavera
+Calavera_SolderMask_1200dpi_No_Border
+
+
+0
+0
+0
+Calavera
+Cap_Pad
+
+
+0
+1
+1
+Calavera
+Jumper-0805
+
+
+0
+2
+1
+Calavera
+SOIC-8_4x5mm_P1.27mm
+8-Lead Plastic Small Outline (SN) - Narrow, 3.90 mm Body [SOIC] (see Microchip Packaging Specification http://ww1.microchip.com/downloads/en/PackagingSpec/00000049BQ.pdf)
+SOIC 1.27
+0
+8
+8
+Calavera
+SOIC-8_Dual_OpAmp
+8-Lead Plastic Small Outline (SN) - Narrow, 3.90 mm Body [SOIC] (see Microchip Packaging Specification http://ww1.microchip.com/downloads/en/PackagingSpec/00000049BQ.pdf)
+SOIC 1.27
+0
+8
+8
+Calavera
+SOIC-8_Dual_OpAmp_Handsolder
+8-Lead Plastic Small Outline (SN) - Narrow, 3.90 mm Body [SOIC] (see Microchip Packaging Specification http://ww1.microchip.com/downloads/en/PackagingSpec/00000049BQ.pdf)
+SOIC 1.27
+0
+8
+8
+Calavera
+SOT-363_NX138BKS
+SOT-363, SC-70-6
+SOT-363 SC-70-6
+0
+6
+6
+Calavera
+SOT-363_NX138BKS_Handsolder
+SOT-363, SC-70-6
+SOT-363 SC-70-6
+0
+6
+6
+Calavera
+SOT23-6
+
+
+0
+6
+6
+Calavera
+SOT23-6-AT42QT1012
+
+
+0
+6
+6
+Calavera
+SOT23-6-AT42QT1012_Handsolder
+
+
+0
+6
+6
+Calavera
+SOT23-6-NMOSx2_Handsolder
+
+
+0
+6
+6
 Capacitor_SMD
 CP_Elec_3x5.3
 SMT capacitor, aluminium electrolytic, 3x5.3, Cornell Dubilier Electronics 
@@ -12157,7 +12318,7 @@ Jumper-0805
 
 0
 2
-2
+1
 Snowflake
 MountingHole_2.1mm_M2
 Mounting Hole 3.2mm, no annular, M3
