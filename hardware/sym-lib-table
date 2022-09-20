@@ -1,4 +1,3 @@
 (sym_lib_table
-  (lib (name Snowflake)(type Legacy)(uri ${KIPRJMOD}/Snowflake_library/Snowflake.lib)(options "")(descr ""))
-  (lib (name Calavera)(type Legacy)(uri C:/Users/Joel/Downloads/Calavera/hardware/library/Calavera.lib)(options "")(descr ""))
+  (lib (name "Snowflake")(type "KiCad")(uri "${KIPRJMOD}/Snowflake_library/Snowflake.kicad_sym")(options "")(descr ""))
 )
