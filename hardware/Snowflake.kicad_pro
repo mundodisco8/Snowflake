@@ -48,24 +48,27 @@
           "min_clearance": 0.25
         }
       },
-      "diff_pair_dimensions": [],
+      "diff_pair_dimensions": [
+        {
+          "gap": 0.0,
+          "via_gap": 0.0,
+          "width": 0.0
+        }
+      ],
       "drc_exclusions": [
-        "silk_over_copper|120912473|116400000|fa49b076-6ae6-4e8b-b66f-e640b666db7a|317977b5-e3ee-4c01-939c-be75700e54c6",
-        "silk_over_copper|120912473|117200000|16d4907a-8371-4187-b8f6-a7e87896a1e8|317977b5-e3ee-4c01-939c-be75700e54c6",
-        "silk_over_copper|120912473|118400000|16d4907a-8371-4187-b8f6-a7e87896a1e8|4d95d793-c6db-429f-9ec2-acff5fa83f23",
-        "silk_over_copper|120912473|119150000|080e5f28-57a8-4340-b0b0-dbbc727a49b3|4d95d793-c6db-429f-9ec2-acff5fa83f23",
-        "silk_over_copper|123000000|122200000|b618e04b-91ec-4b02-84b4-edbd3f3ab635|81c353d8-f90d-4914-a98a-8c37ee5f3505",
-        "silk_over_copper|123000000|124200000|b618e04b-91ec-4b02-84b4-edbd3f3ab635|3c4e3c9e-5a7b-40e8-84f0-35c6f19e6f43",
-        "silk_over_copper|123712473|117400000|686f9528-e896-4738-9430-df465f403b76|f0c8f533-aa7a-453b-9c0f-e286fb10e744",
-        "silk_over_copper|123712473|118200000|10faa51e-72aa-4eac-8c2b-fd208884f12f|f0c8f533-aa7a-453b-9c0f-e286fb10e744",
-        "silk_over_copper|126800000|123400000|297b0731-5491-4fe9-afc5-18f0058414ba|f89bd8c6-f4e8-4e7f-9fd1-f4e447217c64",
-        "silk_over_copper|127200000|104900000|a66ee7b3-fc3c-48f2-953f-1cfbc3fd7259|0bc7bf32-a082-4219-8f5e-02df206e32eb",
-        "silk_over_copper|127800000|108500000|f3de8a6e-653e-4fe7-a370-c96a5acbd9c0|36f56f7b-bdc5-4ee7-a611-f1eed259edca",
-        "silk_over_copper|129700000|104900000|a66ee7b3-fc3c-48f2-953f-1cfbc3fd7259|6f11dec9-631c-4325-a730-a60e4b490369",
-        "silk_over_copper|130300000|108500000|f3de8a6e-653e-4fe7-a370-c96a5acbd9c0|2655fa41-31e2-4603-abd2-dc22ab5acc90",
-        "silk_over_copper|131900000|108500000|f3de8a6e-653e-4fe7-a370-c96a5acbd9c0|4e2be0a5-9c33-495c-9d26-d85f03b49fd7",
-        "silk_over_copper|132200000|104900000|a66ee7b3-fc3c-48f2-953f-1cfbc3fd7259|9fedd041-023a-47c1-8433-0cebf41d4219",
-        "silk_over_copper|139300000|117300000|56498d0e-6f0a-4564-abaa-fdccfdaf4212|b111abec-2137-4626-8df0-89c762908a64"
+        "silk_over_copper|120100000|121300000|2f88d168-2fca-4791-88dc-d89c77d45ceb|6565596c-09bf-426e-8305-ad9f60ede578",
+        "silk_over_copper|120100000|122100000|fd08ba5a-f2da-4011-813a-dd20a416d6ea|6565596c-09bf-426e-8305-ad9f60ede578",
+        "silk_over_copper|120100000|123300000|fd08ba5a-f2da-4011-813a-dd20a416d6ea|18a65c06-d738-4b9d-a1bd-688d62bf10e9",
+        "silk_over_copper|120100000|124050000|7ce76dc3-d38a-4b1d-bc11-e5b00d669bb3|18a65c06-d738-4b9d-a1bd-688d62bf10e9",
+        "silk_over_copper|121800000|127050000|fa391b88-a3f4-421a-8d2a-e2b23cc51317|45ccec46-27f3-4516-9502-b56dbb8974a1",
+        "silk_over_copper|121800000|129050000|fa391b88-a3f4-421a-8d2a-e2b23cc51317|6198e397-267b-4d79-ad14-013fefefe1a6",
+        "silk_over_copper|122900000|122300000|8e6ceac2-e7dd-445f-b1de-a1fedf065a91|6c8236c1-3299-4305-a3d1-5ba7e9b2e423",
+        "silk_over_copper|122900000|123100000|4759c02c-a111-42e6-8fc4-13c2802e14ae|6c8236c1-3299-4305-a3d1-5ba7e9b2e423",
+        "silk_over_copper|125600000|128250000|6108be36-b02f-4615-9731-bfc203025f62|c79c793e-60e2-4221-89ab-1a0963c8df66",
+        "silk_over_copper|138400000|125900000|6d498682-7c74-49f9-8518-16d56871c151|59dc0fd6-473e-4249-bbf0-f6a645f00a85",
+        "silk_over_copper|151645875|112742293|5d7fa21f-d7aa-4f72-bfbb-d78fab687b73|b8e2539f-35f4-4a0a-9214-c4ddb394ca80",
+        "silk_over_copper|153575556|113277912|e4606416-fb8a-46f9-b031-2c83ca70b553|436deaab-7062-49a1-9e34-02edebd5095e",
+        "silk_over_copper|153578131|113286546|5c08b7f1-4f25-40d3-8b17-77f1572d1dcb|436deaab-7062-49a1-9e34-02edebd5095e"
       ],
       "meta": {
         "filename": "board_design_settings.json",
@@ -136,7 +139,12 @@
         0.35,
         0.5
       ],
-      "via_dimensions": [],
+      "via_dimensions": [
+        {
+          "diameter": 0.0,
+          "drill": 0.0
+        }
+      ],
       "zones_allow_external_fillets": false,
       "zones_use_no_outline": true
     },
@@ -390,7 +398,7 @@
       "idf": "",
       "netlist": "Snowflake.net",
       "specctra_dsn": "",
-      "step": "",
+      "step": "../../Snowflake.step",
       "vrml": ""
     },
     "page_layout_descr_file": ""
