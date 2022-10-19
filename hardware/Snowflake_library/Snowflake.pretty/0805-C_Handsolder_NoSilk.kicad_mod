@@ -1,4 +1,4 @@
-(footprint "0805-C_Handsolder" (version 20211014) (generator pcbnew)
+(footprint "0805-C_Handsolder_NoSilk" (version 20211014) (generator pcbnew)
   (layer "F.Cu")
   (tedit 5DEFBF16)
   (attr smd)
