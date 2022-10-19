@@ -1,0 +1,21 @@
+Circuit: * C:\Users\joel.santos\OneDrive - Brompton Bicycle Ltd\Desktop\Snowflake\support\LTSpice\Draft1.asc
+
+Direct Newton iteration for .op point succeeded.
+
+Date: Fri Oct 07 09:48:02 2022
+Total elapsed time: 0.043 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 3270
+traniter = 3267
+tranpoints = 911
+accept = 651
+rejected = 260
+matrix size = 7
+fillins = 1
+solver = Normal
+Matrix Compiler1:      16 opcodes  0.1/[0.0]/0.1
+Matrix Compiler2: off  [0.0]/0.1/0.1
+
