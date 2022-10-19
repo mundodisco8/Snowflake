@@ -41,6 +41,6 @@
   (model "${KIPRJMOD}/Snowflake_library/3D_Models/Battery Holder - 2xAAA - MCP BC22AAAL v2.step"
     (offset (xyz 0 0 7.5))
     (scale (xyz 1 1 1))
-    (rotate (xyz 0 0 0))
+    (rotate (xyz 0 0 90))
   )
 )
