@@ -16,9 +16,9 @@
   )
   (pad "A" smd roundrect (at 1.55 0) (size 1.1 1.1) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (tstamp fc5f8530-4c2b-4e47-bb0a-f565c96cc3dc))
   (pad "K" smd roundrect (at -0.8 0) (size 2.6 1.1) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (tstamp 441e8cee-7d7a-4926-be2f-ad48fe963f5d))
-  (model ":PROJECT_3D_MODELS:3014 - LED -3.0x1.4mm v1.step"
+  (model "${KIPRJMOD}/Snowflake_library/3D_Models/1206 - LED -3.0x1.4mm v1.step"
     (offset (xyz 0 0 0.7))
     (scale (xyz 1 1 1))
-    (rotate (xyz 0 0 90))
+    (rotate (xyz 0 0 -90))
   )
 )
