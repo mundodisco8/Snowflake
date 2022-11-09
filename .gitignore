@@ -14,6 +14,7 @@ _autosave-*
 *-rescue.lib
 *-save.pro
 *-save.kicad_pcb
+hardware/Snowflake-backups/**
 
 # Netlist files (exported from Eeschema)
 *.net
@@ -22,7 +23,7 @@ _autosave-*
 *.dsn
 *.ses
 
-# Exported BOM files
+# Fabrication Outputs: gerbers / boms / etc
 *.xml
 *.csv
-hardware/Snowflake-backups/**
+**/outputs/
