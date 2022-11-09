@@ -56,7 +56,9 @@
         }
       ],
       "drc_exclusions": [
-        "courtyards_overlap|108949998|103400001|449130ba-ad8a-4a0f-b325-dcbdaef902a1|9d360a7a-003a-4bf7-8774-63045f32bcb1"
+        "courtyards_overlap|108949998|103400001|449130ba-ad8a-4a0f-b325-dcbdaef902a1|9d360a7a-003a-4bf7-8774-63045f32bcb1",
+        "courtyards_overlap|112999999|103400001|9d360a7a-003a-4bf7-8774-63045f32bcb1|449130ba-ad8a-4a0f-b325-dcbdaef902a1",
+        "courtyards_overlap|88300001|104275001|9d360a7a-003a-4bf7-8774-63045f32bcb1|df7c2305-3103-4020-b2b6-379c6ba53b79"
       ],
       "meta": {
         "filename": "board_design_settings.json",
