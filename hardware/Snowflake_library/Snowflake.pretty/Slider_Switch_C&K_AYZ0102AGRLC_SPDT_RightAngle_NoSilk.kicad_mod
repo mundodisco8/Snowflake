@@ -79,7 +79,7 @@
       fe2ec9f7-e91a-44a1-aa15-99b6e8b81cb1
     )
   )
-  (model ":PROJECT_3D_MODELS:Switch - Slider - SPDT Right Angle - AYZ0102AGRLC -  C&K v2.step"
+  (model "${KIPRJMOD}/Snowflake_library/3D_Models/Switch - Slider - SPDT Right Angle - AYZ0102AGRLC -  C&K v2.step"
     (offset (xyz 0 0 0.05))
     (scale (xyz 1 1 1))
     (rotate (xyz -90 0 0))

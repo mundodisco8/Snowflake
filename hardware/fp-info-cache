@@ -1,4 +1,4 @@
-20454896128531524
+20458238627610662
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -79368,6 +79368,20 @@ Snowflake
 Snowflake
 16-TSSOP_5x6.5mm_P0.65-CD54HC4017_NoSilk
 
+
+0
+16
+16
+Snowflake
+16-TSSOP_5x6.5mm_P0.65-HEF4017B
+HEF4017B Decade Counter
+
+0
+16
+16
+Snowflake
+16-TSSOP_5x6.5mm_P0.65-HEF4017B_NoSilk
+HEF4017B Decade Counter
 
 0
 16
