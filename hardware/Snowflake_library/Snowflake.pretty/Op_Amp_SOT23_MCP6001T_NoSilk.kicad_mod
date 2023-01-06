@@ -1,7 +1,7 @@
 (footprint "Op_Amp_SOT23_MCP6001T_NoSilk" (version 20211014) (generator pcbnew)
   (layer "F.Cu")
   (tedit 5DEFB878)
-  (attr through_hole)
+  (attr smd)
   (fp_text reference "REF**" (at -0.025 3.975) (layer "F.Fab")
     (effects (font (size 1 1) (thickness 0.15)))
     (tstamp cb3e293b-9a37-41eb-91e6-eaf5060273ac)

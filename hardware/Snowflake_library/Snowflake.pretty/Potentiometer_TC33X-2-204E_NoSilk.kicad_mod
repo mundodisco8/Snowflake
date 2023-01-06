@@ -1,7 +1,7 @@
 (footprint "Potentiometer_TC33X-2-204E_NoSilk" (version 20211014) (generator pcbnew)
   (layer "F.Cu")
   (tedit 5DEFBDD6)
-  (attr through_hole)
+  (attr smd)
   (fp_text reference "REF**" (at 0.025 4.4) (layer "F.Fab")
     (effects (font (size 1 1) (thickness 0.15)))
     (tstamp d5d3087c-85c4-4068-a00d-1ba429499bb3)
