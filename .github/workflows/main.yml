@@ -1,14 +1,18 @@
-name: example
+name: Generate Manufacture Artifacts
 
 on:
   push:
     paths:
     - '**.sch'
     - '**.kicad_pcb'
+    - '**.yml'
+    - '**.yaml'
   pull_request:
     paths:
       - '**.sch'
       - '**.kicad_pcb'
+      - '**.yml'
+      - '**.yaml'
 
 jobs:
   example:
