@@ -18,13 +18,13 @@ jobs:
     - uses: INTI-CMNB/KiBot@v2
       with:
         # Required - kibot config file
-        config: config.kibot.yaml
+        config: ArtifactCreation.kibot.yaml
         # optional - prefix to output defined in config
-        dir: output
+        dir: Artifacts
         # optional - schematic file
-        schema: 'schematic.sch'
+        schema: 'hardware/Snowflake.kicad_sch'
         # optional - PCB design file
-        board: 'pcb.kicad_pcb'
+        board: 'hardware/Snowflake.kicad_pcb'
     - name: upload results
       uses: actions/upload-artifact@v2
       with:
