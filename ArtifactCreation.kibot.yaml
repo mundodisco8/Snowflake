@@ -9,29 +9,25 @@ global:
   # Acknoledge some of the WARNINGS thrown in the process
   # Errors in other areas, when filtered, will appear as warnings, and can be also be filtered here too
   filters:
+    # Even when passing a kicad_common.json, it has no environmental vars
+    - filter: "No Environmental Vars in Kicad Config"
+      number: 9
+      regex: 'KiCad config without environment.vars section'
+    # I "think" the image has no 3D models to reduce size...
+    - filter: 'No 3D Models'
+      number: 10
+      regex: 'Unable to find KiCad 3D models'
     # S1 is the silkscreen with the text in the back (turn this...). It doesn't have a symbol associated in the schematic
-    - filter: 'S1 in board, but not in schematic'
-      number: 13
-      regex: 'S1'
-    # DRC error on courtyard overlap is now a warning
-    - filter: 'Courtyard overlap Battery/counter warning'
-      number: 58
-      regex: 'Footprint U2\n.+BT1'
+    # - filter: 'S1 in board, but not in schematic'
+    #   number: 13
+    #   regex: 'S1'
     - filter: "Battery Internal connection"
       number: 58
       regex: 'BT1 on B.Cu\n.+BT1 on B.Cu'
     # Complaint about the resistor of the potentiometer being `0-50k`
     - filter: 'Pot value'
       number: 20
-      regex: '0-50k'
-    # The docker image has no environment.vars in kicad_common.json
-    - filter: 'No Environment Vars'
-      number: 9
-      regex: 'environment.vars'
-    # I "think" the image has no 3D models to reduce size...
-    - filter: 'No 3D Models'
-      number: 10
-      regex: 'Unable to find KiCad 3D models'
+      regex: "Malformed value: `0-50k`"
   solder_mask_color: white
   silk_screen_color: black
   pcb_finish: ENIG
@@ -112,14 +108,17 @@ preflight:
   # To farther ignore these warnings use the `filters` option in the `global` section.
   # Acknowledge DRC errors
   filters:
-    # The courtyard from the battery holder and counter overlap slightly
-    - filter: "Courtyard from battery and counter overlap slightly"
-      error: 'courtyards_overlap'
-      regex: 'Footprint U2\n.+BT1'
+    # # The courtyard from the battery holder and counter overlap slightly
+    # - filter: "Courtyard from battery and counter overlap slightly"
+    #   error: 'courtyards_overlap'
+    #   regex: 'Footprint U2\n.+BT1'
     # The battery holder has an "internal" connection and kicad doesn't like it...
     - filter: "Battery Internal connection"
       error: 'unconnected_items'
       regex: 'BT1 on B.Cu\n.+BT1 on B.Cu'
+    - filter: "Mismatch with library"
+      error: 'lib_footprint_mismatch'
+      regex: "Footprint '4014_LED_HandSolder_NoSilk' does not match copy in library"
   # [boolean=false] Option for `run_drc`. Ignores the unconnected nets. Useful if you didn't finish the routing.
   ignore_unconnected: false
   # [dict] Replaces tags in the PCB. I.e. to insert the git hash or last revision date.
