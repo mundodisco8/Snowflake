@@ -9,6 +9,18 @@ global:
   # Acknoledge some of the WARNINGS thrown in the process
   # Errors in other areas, when filtered, will appear as warnings, and can be also be filtered here too
   filters:
+    # When running KiBot in Github, it will complain that we have no kicad_common.json
+    - filter: "No kicad_common"
+      number: 8
+      regex: 'Unable to find KiCad configuration file'
+    # ... and again when doing the DRC
+    - filter: "No kicad_common while DRC"
+      number: 58
+      regex: 'Missing KiCad main config file'
+    # ... or user templates...
+    - filter: "No user templates"
+      number: 9
+      regex: 'Unable to find KiCad user templates'
     # Even when passing a kicad_common.json, it has no environmental vars
     - filter: "No Environmental Vars in Kicad Config"
       number: 9

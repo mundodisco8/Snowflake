@@ -1,4 +1,4 @@
-22009347973489273
+22012741387198032
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -84034,6 +84034,20 @@ Snowflake
 0
 14
 14
+Snowflake
+14-SOIC_4x8.75mm_.5-NA556_NoSilk
+
+
+0
+14
+14
+Snowflake
+16-SOIC_3.9x9.9mm_P1.27mm_NoSilk
+SOIC, 16 Pin (JEDEC MS-012AC, https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/soic_narrow-r/r_16.pdf), generated with kicad-footprint-generator ipc_gullwing_generator.py
+SOIC SO
+0
+16
+16
 Snowflake
 16-TSSOP_5x6.5mm_P0.65-74HC565
 
