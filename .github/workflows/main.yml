@@ -15,22 +15,40 @@ on:
       - '**.yaml'
 
 jobs:
-  example:
+  KiBotCICD:
     runs-on: ubuntu-latest
+    env:
+      CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
+      CI_COMMIT_AUTHOR: Github Actions
     steps:
-    - uses: actions/checkout@v3
-    - uses: INTI-CMNB/KiBot@v2_k7
-      with:
-        # Required - kibot config file
-        config: ArtifactCreation.kibot.yaml
-        # optional - prefix to output defined in config
-        dir: Artifacts
-        # optional - schematic file
-        schema: 'hardware/Snowflake.kicad_sch'
-        # optional - PCB design file
-        board: 'hardware/Snowflake.kicad_pcb'
-    - name: upload results
-      uses: actions/upload-artifact@v3
-      with:
-        name: Artifacts
-        path: Artifacts
+      - name: Checkout Step
+        uses: actions/checkout@v4
+      - name: KiBot does its thing
+        uses: INTI-CMNB/KiBot@v2_dk7
+        with:
+          # Required - kibot config file
+          config: ArtifactCreation.kibot.yaml
+          # optional - prefix to output defined in config
+          dir: Artifacts
+          # optional - schematic file
+          schema: 'hardware/Snowflake.kicad_sch'
+          # optional - PCB design file
+          board: 'hardware/Snowflake.kicad_pcb'
+      # - name: Setup upterm session
+      #   uses: lhotari/action-upterm@v1
+      - name: upload results
+        uses: actions/upload-artifact@v3
+        with:
+          name: Artifacts
+          path: Artifacts
+      - name: push changes to repo
+        if: ${{ github.ref == 'refs/heads/master'}}
+        run: |
+          mkdir -p support/img
+          cp Artifacts/Artifacts/BlenderRender/*.png support/img/
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          # so far only changes in the support folder need to be pushed back
+          git add support
+          git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+          git push

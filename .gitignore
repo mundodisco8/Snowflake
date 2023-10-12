@@ -6,6 +6,8 @@
 kibot_errors.filter
 *-erc.txt
 *-drc.txt
+*.log
+*.ogv
 
 # Temporary files
 *.000

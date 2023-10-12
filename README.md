@@ -1,16 +1,16 @@
-View this project on [CADLAB.io](https://cadlab.io/project/26393). 
+View this project on [CADLAB.io](https://cadlab.io/project/26393).
 
 # Snowflake
 
 A Snowflake Christmas decoration.
 <p align="middle">
-  <img src="/support/img/Snowflake - Fusion - Front Angle.png" width="40%" />
-  <img src="/support/img/Snowflake - Fusion - Front.png" width="40%" />
+  <img src="/support/img/Snowflake-3D_blenderTopSlanted.png" width="40%" />
+  <img src="/support/img/Snowflake-3D_blenderTop.png" width="40%" />
 </p>
 
 <p align="middle">
-  <img src="/support/img/Snowflake - Fusion - Back Angle.png" width="40%" />
-  <img src="/support/img/Snowflake - Fusion - Back.png" width="40%" />
+  <img src="/support/img/Snowflake-3D_blenderBottomSlanted.png" width="40%" />
+  <img src="/support/img/Snowflake-3D_blenderBottom.png" width="40%" />
 </p>
 
 Just a design exercise, aiming to get a hand-solderable board (although a bit challenging) that blinks its LEDs without using a microcontoller. I guess you can call it a mix of digital and analogue electronics, because the main trigger is a binary counter that is fed by a clock generated with an opamp in astable multivibrator config.
