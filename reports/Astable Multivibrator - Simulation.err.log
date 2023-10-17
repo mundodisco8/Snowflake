@@ -1,0 +1,138 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jupyter_core/utils/__init__.py", line 173, in wrapped
+    return loop.run_until_complete(inner)
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+%matplotlib widget
+from typing import Sequence
+from ipywidgets import IntSlider, FloatSlider, Textarea, interact
+from numpy import linspace, pi, sign, sin, ndarray
+from scipy.signal import square
+from matplotlib.pyplot import figure
+from matplotlib.lines import Line2D
+# from matplotlib.pyplot import figure
+
+def ThresholdCalculator(Vdd:float, R1: int, R2: int, Rf: int)-> tuple[float, float]:
+    """ Calculates the threshold voltage on a Schmitt trigger (single rail,
+    biased with a voltage divider, ideal rail to rail opamp)
+    Parameters:
+    -----------
+        VoutH: float
+            The value of VoutH when the opamp is saturated high
+        VoutL: float
+            The value of VoutH when the opamp is saturated low
+        Vdd: floag
+            the power supply voltage
+        R1: int
+            top resistor of the voltage divider
+        R2: int
+            bottom resistor of the voltage divider
+        Rf: int
+            feedback resistor
+    Return
+    ------
+        VthL: float
+            the threshold value when the output is LOW
+        VthH: float
+            the thershokd value when the output is HIGH
+    """
+    parallelR1Rf:float= (R1 * Rf) / (R1 + Rf)
+    parallelR2Rf:float= (R2 * Rf) / (R2 + Rf)
+    ratioH:float = (parallelR1Rf / R2) + 1
+    ratioL:float = (R1 / parallelR2Rf) + 1
+    VthH:float = Vdd / ratioH
+    VthL:float = Vdd / ratioL
+    return VthL, VthH
+
+def ThresholdSignal(Vout: Line2D, VthL: float, VthH:float, Vdd: float)-> Sequence[float]:
+    """ Calculates the threshold voltage signanl on a Schmitt trigger (single rail,
+    biased with a voltage divider)
+    Parameters:
+    -----------
+        Vout: float
+            a line 2D with the values of the output signal of the opAmp, as
+            they determine the threshold value
+        VthL: float
+            the threshold value when the output is LOW
+        VthH: float
+            the thershokd value when the output is HIGH
+        Vdd: int
+            the power supply voltage
+    Return
+    ------
+        returnArray: Sequence[float]
+            a sequence with the values of the Schmitt Trigger thresholds, depending
+            on the values of the resistor network, Vdd and the current output of
+            the OpAmp
+    """
+    returnArray:Sequence[float] = []
+    # extrac data from Vout (line2D) to array
+    voltages:Sequence[float] = Vout.get_ydata()
+    for i in range(len(voltages)):
+        if voltages[i] > (Vdd / 2):
+            returnArray.append(VthH)
+        else:
+            returnArray.append(VthL)
+    return returnArray
+
+# Resistor Values and VDD
+R_1:int = 10000
+R_2:int = 10000
+R_3:int = 10000
+Vdd:float = 3
+# x axis is 0 to 4s, 100 values
+x = linspace(0, 4, 100)
+fig = figure()
+ax = fig.add_subplot(1, 1, 1)
+# Generate a square signal, simulating the switching output of the opamp, .5Hz
+a = 3/2 * (square(2 * pi * 1/2 * x) + 1)
+out_signal, = ax.plot(x, a)
+# Calculate the threshold values for the resistor network and the output signal
+thresholdl, thresholdh = ThresholdCalculator(Vdd, R_1, R_2, R_3)
+threshold_signal, = ax.plot(x, ThresholdSignal(out_signal, thresholdl, thresholdh, Vdd))
+
+def update(R1:int=1, R2:int=1, R3:int=1):
+    thresholdl, thresholdh = ThresholdCalculator(Vdd, R1, R2, R3)
+    print(f"Threshold low is {thresholdl:.2f}V and threshold high is {thresholdh:.2f}V. Ratio is {100 * (thresholdh - thresholdl) / Vdd:.0f}% of VDD")
+    threshold_signal.set_ydata(ThresholdSignal(out_signal, thresholdl, thresholdh, Vdd))
+    fig.canvas.draw_idle()
+
+# Create a wiget for
+R1 = IntSlider(value=10000, min=1000, max=50000, step=1000, description='R1 (Ω):',
+    orientation='horizontal', readout=True, readout_format='.2d')
+R2 = IntSlider(value=10000, min=1000, max=50000, step=1000, description='R2 (Ω):',
+    orientation='horizontal', readout=True, readout_format='.2d')
+Rf = IntSlider(value=10000, min=1000, max=50000, step=1000, description='Rf (Ω):',
+    orientation='horizontal', readout=True, readout_format='.2d')
+interact(update, R1=R1, R2=R2, R3=Rf);
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[1], line 10[0m
+[1;32m      7[0m [38;5;28;01mfrom[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mlines[39;00m [38;5;28;01mimport[39;00m Line2D
+[1;32m      8[0m [38;5;66;03m# from matplotlib.pyplot import figure[39;00m
+[0;32m---> 10[0m [38;5;28;01mdef[39;00m [38;5;21mThresholdCalculator[39m(Vdd:[38;5;28mfloat[39m, R1: [38;5;28mint[39m, R2: [38;5;28mint[39m, Rf: [38;5;28mint[39m)[38;5;241m-[39m[38;5;241m>[39m [38;5;28;43mtuple[39;49m[43m[[49m[38;5;28;43mfloat[39;49m[43m,[49m[43m [49m[38;5;28;43mfloat[39;49m[43m][49m:
+[1;32m     11[0m [38;5;250m    [39m[38;5;124;03m""" Calculates the threshold voltage on a Schmitt trigger (single rail,[39;00m
+[1;32m     12[0m [38;5;124;03m    biased with a voltage divider, ideal rail to rail opamp)[39;00m
+[1;32m     13[0m [38;5;124;03m    Parameters:[39;00m
+[0;32m   (...)[0m
+[1;32m     32[0m [38;5;124;03m            the thershokd value when the output is HIGH[39;00m
+[1;32m     33[0m [38;5;124;03m    """[39;00m
+[1;32m     34[0m     parallelR1Rf:[38;5;28mfloat[39m[38;5;241m=[39m (R1 [38;5;241m*[39m Rf) [38;5;241m/[39m (R1 [38;5;241m+[39m Rf)
+
+[0;31mTypeError[0m: 'type' object is not subscriptable
+

@@ -1,0 +1,1168 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Snowflake - Design Justification &#8212; Snowflake&#39;s Repo Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Design Justification';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Astable Multivibrator Simulation" href="Astable%20Multivibrator%20-%20Simulation.html" />
+    <link rel="prev" title="Snowflake Interactive Documentation" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Snowflake Interactive Documentation
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Snowflake - Design Justification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Astable%20Multivibrator%20-%20Simulation.html">Astable Multivibrator Simulation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mundodisco8/Snowflake" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mundodisco8/Snowflake/issues/new?title=Issue%20on%20page%20%2FDesign Justification.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Design Justification.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Snowflake - Design Justification</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-it-do">What does it do?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#led-sequence">LED sequence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clock-generation">Clock Generation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#schmitt-trigger">Schmitt Trigger</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#astable-multivibrator">Astable Multivibrator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#astable-multivibrator-passive-components-values">Astable multivibrator Passive Components Values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#powering-it-up">Powering it up</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-an-led">Choosing an LED</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#yellow-led">Yellow LED</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#white-led">White LED</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limiting-resistor-calculations">Limiting Resistor Calculations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ltspice-simulation">LTSPICE Simulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-coin-cell">One Coin Cell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-coin-cells">Two Coin Cells</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-it">Testing it</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#findings">Findings</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#decade-counter-output-connections">Decade counter output connections</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blinking-pattern">Blinking pattern</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#led-brightness-battery-duration">LED Brightness, Battery duration</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="snowflake-design-justification">
+<h1>Snowflake - Design Justification<a class="headerlink" href="#snowflake-design-justification" title="Permalink to this heading">#</a></h1>
+<section id="what-does-it-do">
+<h2>What does it do?<a class="headerlink" href="#what-does-it-do" title="Permalink to this heading">#</a></h2>
+<p>This Christmas decoration has an LED in the centre and two rings of six LEDs. The idea is to blink them, following the pattern centre - inner ring - outer ring - pause.</p>
+<p>some inline <span class="math notranslate nohighlight">\(add_{math}\)</span></p>
+<section id="led-sequence">
+<h3>LED sequence<a class="headerlink" href="#led-sequence" title="Permalink to this heading">#</a></h3>
+<p>To alternate between LEDs, we use a decade counter. The <code class="docutils literal notranslate"><span class="pre">HC4017</span></code> is a Johnson counter with 10 decoded outputs. Only one output is high at a time, and the each output is sequentially selected on the low-to-high edge of the clock signal.</p>
+<a class="reference internal image-reference" href="_images/Counter.png"><img alt="_images/Counter.png" class="align-center" src="_images/Counter.png" style="width: 300px;" /></a>
+<p>In order to cycle through the different elements, the central LED (LED0) is connected to output 1, the inner ring is connected to output 2 and the outer ring is connected to output 3. Output 0 is left unconnected to provide a pause between cycles (and also reduce a bit the average battery draw). Output 4 is connected to the reset pin, so as soon as it gets active, the counter resets and the cycle starts again.</p>
+</section>
+<section id="clock-generation">
+<h3>Clock Generation<a class="headerlink" href="#clock-generation" title="Permalink to this heading">#</a></h3>
+<p>To generate the clock signal, we use an Op Amp in astable vibrator configuration. It’s made by two elements, a Schmitt trigger and an RC circuit connected to the inverting pin of the opamp. Because we are using a single rail to power the op amp, we have to bias the non-inverting pin.</p>
+<a class="reference internal image-reference" href="_images/Clock.png"><img alt="_images/Clock.png" class="align-center" src="_images/Clock.png" style="width: 400px;" /></a>
+<section id="schmitt-trigger">
+<h4>Schmitt Trigger<a class="headerlink" href="#schmitt-trigger" title="Permalink to this heading">#</a></h4>
+<p>The Schmitt trigger is formed by the opamp U1A and R3 as feedback resistor and R1 and R2 used as voltage divider to set the bias point. The opamp is powered by the battery directly and V- is connected to GND. As the voltage of the battery will drop, I decided not to use a voltage reference for the bias, because as VDD drops, the ratio between VDD and Vbias would change. The voltage divider affects the Schmitt trigger, by changing the value of the threshold levels, but we need hysteresis anyway.</p>
+<p>The analysis is pretty simple. If Vout (labelled CLK) is high, the equivalent circuit is</p>
+<a class="reference internal image-reference" href="_images/Schmitt_OutputHigh.png"><img alt="_images/Schmitt_OutputHigh.png" class="align-center" src="_images/Schmitt_OutputHigh.png" style="width: 200px;" /></a>
+<p>Doing some basic Kirchoff…</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{(VDD - Vbias)}{(R1 // R3)} = \frac{Vbias}{R2} \Rightarrow \frac{Vdd}{Vbias} - 1 = \frac{(R1 // R3)}{R2} \Rightarrow Vbias = \frac{Vdd}{\frac{(R1//R3)}{R2}+1}
+\]</div>
+<p>Similarly, when the output is low</p>
+<a class="reference internal image-reference" href="_images/Schmitt_OutputLow.png"><img alt="_images/Schmitt_OutputLow.png" class="align-center" src="_images/Schmitt_OutputLow.png" style="width: 200px;" /></a>
+<div class="math notranslate nohighlight">
+\[
+\frac{(VDD - Vbias)}{R1} = \frac{Vbias}{(R2 // R3)} \Rightarrow \frac{Vdd}{Vbias} - 1 = \frac{R1}{(R2 // R3)} \Rightarrow Vbias = \frac{Vdd}{\frac{R1}{(R2 // R3)}+1}
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(R1 = R2\)</span>, <span class="math notranslate nohighlight">\(Vbias = VDD/2\)</span> . It’s easy to see how in that case, when the output is low, the feedback resistor pushes the threshold voltage (Vbias) up from whatever the R1 - R2 voltage divider would set by appearing in parallel to R1 (thus, decreasing its value and typing the balance towards R2). In the same way, when the output is high, by appearing in parallel to R2, it lowers Vbias.</p>
+<p>The following code shows an interactive plot that allows changing the values of R1, R2 and R3 and see how they impact the threshold levels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Schmitt Trigger interactive plot</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="o">%</span><span class="k">matplotlib</span> widget
+<span class="kn">from</span> <span class="nn">ipywidgets.widgets</span> <span class="kn">import</span> <span class="n">IntSlider</span><span class="p">,</span> <span class="n">FloatSlider</span><span class="p">,</span> <span class="n">Textarea</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">ceil</span><span class="p">,</span> <span class="n">exp</span>
+<span class="kn">from</span> <span class="nn">matplotlib.lines</span> <span class="kn">import</span> <span class="n">Line2D</span>
+<span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">figure</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">float64</span><span class="p">,</span> <span class="n">linspace</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sign</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">greater</span>
+<span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">NDArray</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">signal</span>
+<span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">argrelextrema</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Sequence</span>
+
+<span class="k">def</span> <span class="nf">ThresholdCalculator</span><span class="p">(</span><span class="n">Vdd</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">R1</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">R2</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">Rf</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculates the threshold voltage on a Schmitt trigger (single rail,</span>
+<span class="sd">    biased with a voltage divider, ideal rail to rail opamp)</span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">        VoutH: float</span>
+<span class="sd">            The value of VoutH when the opamp is saturated high</span>
+<span class="sd">        VoutL: float</span>
+<span class="sd">            The value of VoutH when the opamp is saturated low</span>
+<span class="sd">        Vdd: floag</span>
+<span class="sd">            the power supply voltage</span>
+<span class="sd">        R1: int</span>
+<span class="sd">            top resistor of the voltage divider</span>
+<span class="sd">        R2: int</span>
+<span class="sd">            bottom resistor of the voltage divider</span>
+<span class="sd">        Rf: int</span>
+<span class="sd">            feedback resistor</span>
+<span class="sd">    Return</span>
+<span class="sd">    ------</span>
+<span class="sd">        VthL: float</span>
+<span class="sd">            the threshold value when the output is LOW</span>
+<span class="sd">        VthH: float</span>
+<span class="sd">            the thershokd value when the output is HIGH</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">parallelR1Rf</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span> <span class="p">(</span><span class="n">R1</span> <span class="o">*</span> <span class="n">Rf</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">R1</span> <span class="o">+</span> <span class="n">Rf</span><span class="p">)</span>
+    <span class="n">parallelR2Rf</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span> <span class="p">(</span><span class="n">R2</span> <span class="o">*</span> <span class="n">Rf</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">R2</span> <span class="o">+</span> <span class="n">Rf</span><span class="p">)</span>
+    <span class="n">ratioH</span><span class="p">:</span><span class="nb">float</span> <span class="o">=</span> <span class="p">(</span><span class="n">parallelR1Rf</span> <span class="o">/</span> <span class="n">R2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">ratioL</span><span class="p">:</span><span class="nb">float</span> <span class="o">=</span> <span class="p">(</span><span class="n">R1</span> <span class="o">/</span> <span class="n">parallelR2Rf</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">VthH</span><span class="p">:</span><span class="nb">float</span> <span class="o">=</span> <span class="n">Vdd</span> <span class="o">/</span> <span class="n">ratioH</span>
+    <span class="n">VthL</span><span class="p">:</span><span class="nb">float</span> <span class="o">=</span> <span class="n">Vdd</span> <span class="o">/</span> <span class="n">ratioL</span>
+    <span class="k">return</span> <span class="n">VthL</span><span class="p">,</span> <span class="n">VthH</span>
+
+<span class="k">def</span> <span class="nf">ThresholdSignal</span><span class="p">(</span><span class="n">Vout</span><span class="p">:</span> <span class="n">Line2D</span><span class="p">,</span> <span class="n">VthL</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">VthH</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">Vdd</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span><span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculates the threshold voltage signanl on a Schmitt trigger (single rail,</span>
+<span class="sd">    biased with a voltage divider)</span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">        Vout: float</span>
+<span class="sd">            a line 2D with the values of the output signal of the opAmp, as</span>
+<span class="sd">            they determine the threshold value</span>
+<span class="sd">        VthL: float</span>
+<span class="sd">            the threshold value when the output is LOW</span>
+<span class="sd">        VthH: float</span>
+<span class="sd">            the thershokd value when the output is HIGH</span>
+<span class="sd">        Vdd: int</span>
+<span class="sd">            the power supply voltage</span>
+<span class="sd">    Return</span>
+<span class="sd">    ------</span>
+<span class="sd">        returnArray: Sequence[float]</span>
+<span class="sd">            a sequence with the values of the Schmitt Trigger thresholds, depending</span>
+<span class="sd">            on the values of the resistor network, Vdd and the current output of</span>
+<span class="sd">            the OpAmp</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">returnArray</span><span class="p">:</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># extrac data from Vout (line2D) to array</span>
+    <span class="n">voltages</span><span class="p">:</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Vout</span><span class="o">.</span><span class="n">get_ydata</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">voltages</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">voltages</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">Vdd</span> <span class="o">/</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="n">returnArray</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">VthH</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">returnArray</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">VthL</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">returnArray</span>
+
+<span class="k">def</span> <span class="nf">capacitor_voltage</span><span class="p">(</span><span class="n">t</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">R</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">C</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Vapplied</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculates the voltage of a capacitor (Vout) in an RC filter after</span>
+<span class="sd">    time = t seconds, when Vapplied volts are applied at the input</span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">        t: float</span>
+<span class="sd">            time elapsed in seconds since Vapplied was applied at the input of</span>
+<span class="sd">            the RC filter</span>
+<span class="sd">        R: int</span>
+<span class="sd">            The value of the resistor (in Ω) of the RC filter</span>
+<span class="sd">        C: float</span>
+<span class="sd">            The value of the capacitor (in Farads) of the RC filter</span>
+<span class="sd">        Vapplied: float</span>
+<span class="sd">            The voltage (in Volts) applied at the input</span>
+<span class="sd">    Retunr</span>
+<span class="sd">    --------</span>
+<span class="sd">        cap_Volt: float</span>
+<span class="sd">            The voltage in the capacitor in Volts (Vout of the RC filter)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cap_volt</span> <span class="o">=</span> <span class="n">Vapplied</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">exp</span> <span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="o">/</span><span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">C</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">cap_volt</span>
+
+<span class="k">def</span> <span class="nf">astable_vibrator_signals</span><span class="p">(</span><span class="n">times</span><span class="p">:</span><span class="n">NDArray</span><span class="p">[</span><span class="n">float64</span><span class="p">],</span> <span class="n">Rd1</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">Rd2</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">Rf</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">Rc</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">C</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">Vdd</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">tuple</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculates the values of the signals of interest on an Astable Multivibrator: the</span>
+<span class="sd">    voltages at the inverting and non inverting pins and the output signal. The amplifier</span>
+<span class="sd">    is ideal, powered with a single rail and biased with a voltage divider.</span>
+<span class="sd">    The calculations are based on the values of the feedback resistor Rf, the values of the</span>
+<span class="sd">    resistors on the voltage divider and the values of the RC filter in the non-inverting pin</span>
+<span class="sd">    as well as the Vdd voltage.</span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">        times: NDArray[float64]</span>
+<span class="sd">            A sequence of values for the time at wich the values of the signals has to be calculated</span>
+<span class="sd">        Rd1:int</span>
+<span class="sd">            The value of the voltage divider resistor connected to VDD</span>
+<span class="sd">        Rd2:int</span>
+<span class="sd">            The value of the voltage divider resistor connected to GND</span>
+<span class="sd">        Rf:int</span>
+<span class="sd">            The value of the feedback resistor connected from out to v+.</span>
+<span class="sd">        Rc: int</span>
+<span class="sd">            The value of the resistor (in Ω) connected to the RC filter</span>
+<span class="sd">        C: float</span>
+<span class="sd">            The value of the capacitor (in Farads) in the RC filter</span>
+<span class="sd">        Vdd: float</span>
+<span class="sd">            the voltage applied to the capacitor. It&#39;s constant for all the values in times</span>
+<span class="sd">    Return</span>
+<span class="sd">    ------</span>
+<span class="sd">        [vi_signal, vo_signal, vf_signal]: tuple[Sequence[float],Sequence[float],Sequence[float]</span>
+<span class="sd">            Sequences with the values of voltage at the inverting, output and non-inverting</span>
+<span class="sd">            pins of the OpAmp, respectively.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">vi_signal</span><span class="p">:</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
+    <span class="n">vo_signal</span><span class="p">:</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
+    <span class="n">vf_signal</span><span class="p">:</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
+
+    <span class="c1"># Get the schimtt trigger thresholds for this config</span>
+    <span class="n">thresholdl</span><span class="p">,</span> <span class="n">thresholdh</span> <span class="o">=</span> <span class="n">ThresholdCalculator</span><span class="p">(</span><span class="n">Vdd</span><span class="p">,</span> <span class="n">Rd1</span><span class="p">,</span> <span class="n">Rd2</span><span class="p">,</span> <span class="n">Rf</span><span class="p">)</span>
+
+    <span class="c1">#initial conditions</span>
+    <span class="n">vi_signal</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># capacitor starts discharged</span>
+    <span class="c1"># vi below threshold, so vo is HIGH</span>
+    <span class="n">vo_signal</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">Vdd</span>
+    <span class="c1"># vo is HIGH so Vthreshold is VthH</span>
+    <span class="n">vf_signal</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">thresholdh</span>
+    <span class="n">start_t</span> <span class="o">=</span> <span class="n">times</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">start_v</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">rising</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># an aux variable to keep track if we are charging or discharging C</span>
+    <span class="k">if</span> <span class="n">vi_signal</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">vf_signal</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">rising</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">)):</span> <span class="c1">#skip times[0] as we have entered the initial conditions by hand</span>
+        <span class="k">if</span> <span class="n">vi_signal</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">vf_signal</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="c1"># If v- &lt; v+, the voltage at the cap is below trheshold</span>
+            <span class="c1"># We will charge the capacitor</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">vi_signal</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">capacitor_voltage</span><span class="p">(</span><span class="n">time</span><span class="o">-</span><span class="n">start_t</span><span class="p">,</span> <span class="n">Rc</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">Vdd</span> <span class="o">-</span> <span class="n">start_v</span><span class="p">)</span> <span class="o">+</span> <span class="n">start_v</span>
+            <span class="n">vf_signal</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">thresholdh</span>
+            <span class="n">vo_signal</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Vdd</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1"># vi_signal[i - 1] &gt;= vf_signal[i-1]:</span>
+            <span class="c1"># Else, the voltage at the cap is above the trheshold</span>
+            <span class="c1"># We will discharge the capacitor</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">vi_signal</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">capacitor_voltage</span><span class="p">(</span><span class="n">time</span><span class="o">-</span><span class="n">start_t</span><span class="p">,</span> <span class="n">Rc</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="mi">0</span> <span class="o">-</span> <span class="n">start_v</span><span class="p">)</span> <span class="o">+</span> <span class="n">start_v</span>
+            <span class="n">vf_signal</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">thresholdl</span>
+            <span class="n">vo_signal</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># after updating the values, check if we switched the thresholds</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">vi_signal</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">vf_signal</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="ow">and</span> <span class="n">rising</span><span class="p">:</span>
+            <span class="n">start_v</span> <span class="o">=</span> <span class="n">thresholdh</span>
+            <span class="n">start_t</span> <span class="o">=</span> <span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">rising</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">vi_signal</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">vf_signal</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">rising</span><span class="p">:</span>
+            <span class="n">start_v</span> <span class="o">=</span> <span class="n">thresholdl</span>
+            <span class="n">start_t</span> <span class="o">=</span> <span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">rising</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="n">vi_signal</span><span class="p">,</span> <span class="n">vo_signal</span><span class="p">,</span> <span class="n">vf_signal</span>
+
+<span class="c1"># Resistor Values and VDD</span>
+<span class="n">R_1</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">R_2</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">R_3</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">Vdd</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="c1"># x axis is 0 to 4s, 100 values</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Generate a square signal, simulating the switching output of the opamp, .5Hz</span>
+<span class="n">out_signal</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="c1"># Calculate the threshold values for the resistor network and the output signal</span>
+<span class="n">thresholdl</span><span class="p">,</span> <span class="n">thresholdh</span> <span class="o">=</span> <span class="n">ThresholdCalculator</span><span class="p">(</span><span class="n">Vdd</span><span class="p">,</span> <span class="n">R_1</span><span class="p">,</span> <span class="n">R_2</span><span class="p">,</span> <span class="n">R_3</span><span class="p">)</span>
+<span class="n">threshold_signal</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ThresholdSignal</span><span class="p">(</span><span class="n">out_signal</span><span class="p">,</span> <span class="n">thresholdl</span><span class="p">,</span> <span class="n">thresholdh</span><span class="p">,</span> <span class="n">Vdd</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">R1</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">R2</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">R3</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">thresholdl</span><span class="p">,</span> <span class="n">thresholdh</span> <span class="o">=</span> <span class="n">ThresholdCalculator</span><span class="p">(</span><span class="n">Vdd</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">R3</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Threshold low is </span><span class="si">{</span><span class="n">thresholdl</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">V and threshold high is </span><span class="si">{</span><span class="n">thresholdh</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">V. Ratio is </span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">thresholdh</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">thresholdl</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">Vdd</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">% of VDD&quot;</span><span class="p">)</span>
+    <span class="n">threshold_signal</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">ThresholdSignal</span><span class="p">(</span><span class="n">out_signal</span><span class="p">,</span> <span class="n">thresholdl</span><span class="p">,</span> <span class="n">thresholdh</span><span class="p">,</span> <span class="n">Vdd</span><span class="p">))</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw_idle</span><span class="p">()</span>
+
+<span class="c1"># Create a wiget for</span>
+<span class="n">R1</span> <span class="o">=</span> <span class="n">IntSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;R1 (Ω):&#39;</span><span class="p">,</span>
+    <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">readout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">readout_format</span><span class="o">=</span><span class="s1">&#39;.2d&#39;</span><span class="p">)</span>
+<span class="n">R2</span> <span class="o">=</span> <span class="n">IntSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;R2 (Ω):&#39;</span><span class="p">,</span>
+    <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">readout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">readout_format</span><span class="o">=</span><span class="s1">&#39;.2d&#39;</span><span class="p">)</span>
+<span class="n">Rf</span> <span class="o">=</span> <span class="n">IntSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Rf (Ω):&#39;</span><span class="p">,</span>
+    <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">readout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">readout_format</span><span class="o">=</span><span class="s1">&#39;.2d&#39;</span><span class="p">)</span>
+<span class="n">thresholdL</span> <span class="o">=</span> <span class="n">Textarea</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="s1">&#39;&quot;0&quot;&#39;</span><span class="p">,</span>
+    <span class="n">placeholder</span><span class="o">=</span><span class="s1">&#39;&quot;0&quot;&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;String:&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">interact</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">R1</span><span class="o">=</span><span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="o">=</span><span class="n">R2</span><span class="p">,</span> <span class="n">R3</span><span class="o">=</span><span class="n">Rf</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">15</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">argrelextrema</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Sequence</span>
+<span class="ne">---&gt; </span><span class="mi">15</span> <span class="k">def</span> <span class="nf">ThresholdCalculator</span><span class="p">(</span><span class="n">Vdd</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">R1</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">R2</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">Rf</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span><span class="w">     </span><span class="sd">&quot;&quot;&quot; Calculates the threshold voltage on a Schmitt trigger (single rail,</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span><span class="sd">     biased with a voltage divider, ideal rail to rail opamp)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span><span class="sd">     Parameters:</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span><span class="sd">             the thershokd value when the output is HIGH</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span>     <span class="n">parallelR1Rf</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span> <span class="p">(</span><span class="n">R1</span> <span class="o">*</span> <span class="n">Rf</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">R1</span> <span class="o">+</span> <span class="n">Rf</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: &#39;type&#39; object is not subscriptable
+</pre></div>
+</div>
+</div>
+</div>
+<p>From this experiment, R1 = R2 = R3 seem like a good compromise. The threshold levels for Vdd = 3V are 1V and 2V. The hysteresis is 1V, 33% of the VDD value. And this will simplify construction and the BOM, as we will need less resistor values.</p>
+</section>
+<section id="astable-multivibrator">
+<h4>Astable Multivibrator<a class="headerlink" href="#astable-multivibrator" title="Permalink to this heading">#</a></h4>
+<p>To complete the astable vibrator circuit, we need an oscillating input. We will use the output of the opamp to charge and discharge an RC filter, and connect the capacitor to the inverting input of the opamp. Because the input is not stable in any state, the output will keep oscillating, which in turn will keep the input oscillating… you get the drill.</p>
+<p>At the start, the capacitor is discharged, so the inverting input is at 0. The non-inverting input is biased at VDD/2, so the output of the opamp is high, and the voltage at the non-inverting input is set to VthresholdH through the feedback resistor. The output of the opamp starts charging the capacitor</p>
+<div class="math notranslate nohighlight">
+\[V_{cap} = V_{applied} * (1 - e ^{ (-t/(R*C))}) \]</div>
+<p>Eventually, <span class="math notranslate nohighlight">\(V_{cap} \gt V_{thresholdH}\)</span>, so the output of the opamp will go low, the voltage in <span class="math notranslate nohighlight">\(V_{+}\)</span> will be set at <span class="math notranslate nohighlight">\(V_{thresholdL}\)</span> and the capacitor wills start to discharge through <span class="math notranslate nohighlight">\(R\)</span>, until <span class="math notranslate nohighlight">\(V_{cap} \le V_{thresholdL}\)</span> and the cicle starts again.</p>
+<p>The first rise to <span class="math notranslate nohighlight">\(V_{thresholdH}\)</span> will take longer, because the cap has to charge from 0V to <span class="math notranslate nohighlight">\(V_{thresholdH}\)</span>, but after that, the output of the opamp will be a square wave with a 50% duty cycle.</p>
+<p>The next code will generate an interactive plot allowing changing the values for all the passives in the circuit.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Astable Multivibrator Graphs</span>
+<span class="sd">Putting it all together, shows an interactive plot where we can see the impact of the different</span>
+<span class="sd">variables of the circuit have on the output.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">Rd1</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">Rd2</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">Rf</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">Rcap</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="n">cap</span><span class="p">:</span><span class="nb">float</span> <span class="o">=</span> <span class="mf">0.00001</span>
+<span class="n">Vdd</span><span class="p">:</span><span class="nb">float</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">start_t</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">stop_t</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">delta_t</span> <span class="o">=</span> <span class="mf">.01</span>
+<span class="n">times</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="n">start_t</span><span class="p">,</span> <span class="n">stop_t</span><span class="p">,</span> <span class="n">ceil</span><span class="p">((</span><span class="n">stop_t</span> <span class="o">-</span> <span class="n">start_t</span><span class="p">)</span> <span class="o">/</span> <span class="n">delta_t</span><span class="p">))</span>
+
+<span class="c1"># Prepare the plot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Generate the three signals to print</span>
+<span class="n">vi_values</span><span class="p">,</span> <span class="n">vo_values</span><span class="p">,</span> <span class="n">vf_values</span> <span class="o">=</span> <span class="n">astable_vibrator_signals</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">Rd1</span><span class="p">,</span> <span class="n">Rd2</span><span class="p">,</span> <span class="n">Rf</span><span class="p">,</span> <span class="n">Rcap</span><span class="p">,</span> <span class="n">cap</span><span class="p">,</span> <span class="n">Vdd</span><span class="p">)</span>
+<span class="n">vf_signal</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">vf_values</span><span class="p">)</span>
+<span class="n">vi_signal</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">vi_values</span><span class="p">)</span>
+<span class="n">vo_signal</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">vo_values</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">Rd1</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">Rd2</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">Rf</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">Rcap</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">cap</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">Vdd</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+    <span class="c1"># update the signal</span>
+    <span class="n">vi_upd_values</span><span class="p">,</span> <span class="n">vo_upd_values</span><span class="p">,</span> <span class="n">vf_upd_values</span> <span class="o">=</span> <span class="n">astable_vibrator_signals</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">Rd1</span><span class="p">,</span> <span class="n">Rd2</span><span class="p">,</span> <span class="n">Rf</span><span class="p">,</span> <span class="n">Rcap</span><span class="p">,</span> <span class="n">cap</span><span class="o">/</span><span class="mi">100000</span><span class="p">,</span> <span class="n">Vdd</span><span class="p">)</span>
+    <span class="n">vf_signal</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">vf_upd_values</span><span class="p">)</span>
+    <span class="n">vo_signal</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">vo_upd_values</span><span class="p">)</span>
+    <span class="n">vi_signal</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">vi_upd_values</span><span class="p">)</span>
+    <span class="c1"># Print the freq/period of the resulting output signal</span>
+    <span class="c1"># get the indices of the local maxima of vi</span>
+    <span class="n">vi_local_maxes</span><span class="o">=</span><span class="p">(</span><span class="n">argrelextrema</span><span class="p">(</span><span class="n">array</span><span class="p">(</span><span class="n">vi_upd_values</span><span class="p">),</span> <span class="n">greater</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;wrap&#39;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># the period is the time different between the first two</span>
+    <span class="n">clk_period</span> <span class="o">=</span> <span class="n">times</span><span class="p">[</span><span class="n">vi_local_maxes</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">-</span> <span class="n">times</span><span class="p">[</span><span class="n">vi_local_maxes</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Clk Freq is </span><span class="si">{</span><span class="mi">1</span><span class="o">/</span><span class="n">clk_period</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">Hz / Period </span><span class="si">{</span><span class="n">clk_period</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw_idle</span><span class="p">()</span>
+
+<span class="c1"># Create a widgets for variables that will be modifiable</span>
+<span class="n">Rd1_slider</span> <span class="o">=</span> <span class="n">IntSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">500000</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Rd1 (Ω):&#39;</span><span class="p">,</span>
+    <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">readout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">readout_format</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">)</span>
+<span class="n">Rd2_slider</span> <span class="o">=</span> <span class="n">IntSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">500000</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Rd2 (Ω):&#39;</span><span class="p">,</span>
+    <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">readout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">readout_format</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">)</span>
+<span class="n">Rf_slider</span> <span class="o">=</span> <span class="n">IntSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">500000</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Rf (Ω):&#39;</span><span class="p">,</span>
+    <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">readout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">readout_format</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">)</span>
+<span class="n">Rcap_slider</span> <span class="o">=</span> <span class="n">IntSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Rcap (Ω):&#39;</span><span class="p">,</span>
+    <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">readout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">readout_format</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">)</span>
+<span class="n">cap_slider</span> <span class="o">=</span> <span class="n">FloatSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">.01</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">.01</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;C (μF):&#39;</span><span class="p">,</span>
+    <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">readout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">readout_format</span><span class="o">=</span><span class="s1">&#39;.3f&#39;</span><span class="p">)</span>
+<span class="n">Vdd_slider</span> <span class="o">=</span> <span class="n">FloatSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Vdd (V):&#39;</span><span class="p">,</span>
+    <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">readout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">readout_format</span><span class="o">=</span><span class="s1">&#39;.2f&#39;</span><span class="p">)</span>
+
+<span class="n">interact</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">Rd1</span><span class="o">=</span><span class="n">Rd1_slider</span><span class="p">,</span> <span class="n">Rd2</span><span class="o">=</span><span class="n">Rd2_slider</span><span class="p">,</span> <span class="n">Rf</span><span class="o">=</span> <span class="n">Rf_slider</span><span class="p">,</span> <span class="n">Rcap</span><span class="o">=</span><span class="n">Rcap_slider</span><span class="p">,</span> <span class="n">cap</span><span class="o">=</span><span class="n">cap_slider</span><span class="p">,</span> <span class="n">Vdd</span><span class="o">=</span><span class="n">Vdd_slider</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "f9a5e328d398474bb4c49656c286bed9", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "7f777183b7b04f4abf576786b8b3f6bf", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+</section>
+<section id="astable-multivibrator-passive-components-values">
+<h4>Astable multivibrator Passive Components Values<a class="headerlink" href="#astable-multivibrator-passive-components-values" title="Permalink to this heading">#</a></h4>
+<p>I like the idea of not having lots of different resistors on my circuit. The Schmitt trigger is balanced if <span class="math notranslate nohighlight">\(R_1 = R_2 = R_f\)</span>, so we’ll select your ubiquitous 10kΩ resistor for them.</p>
+<p>For the RC filter, I think the right rate of blinking should be around 1s, but not everyone might agree so let’s use a variable resistor in the RC. With a 4.7μF cap we get a period of 1s with ~15kΩ. Using a 50kΩ pot you could slow it down up to T=3.2s. Because the minimum resistance of a pot is quite low (tens of Ω), we can add a series resistor that works as a lower limit. 10kΩ would be a bit too much (as that would set the minimum period on .6s), but I don’t want to add another resistor value and because smd resistors are practically free, I’ll trade some space and put two 10ks in parallel to get the minimum resistance to 5kΩ that would result in minimum period of T=.35s</p>
+<a class="reference internal image-reference" href="_images/Clock_With_Values.png"><img alt="_images/Clock_With_Values.png" class="align-center" src="_images/Clock_With_Values.png" style="height: 300px;" /></a>
+</section>
+</section>
+</section>
+<section id="powering-it-up">
+<h2>Powering it up<a class="headerlink" href="#powering-it-up" title="Permalink to this heading">#</a></h2>
+<p>The first limitation I found is around power. I wanted to use a AAA coin cell to power them, because they store quite an amount of energy (a typical AAA stores 800-1200 mAh, 750mAh if rechargeable (<a class="reference external" href="https://www.batterystation.co.uk/content/datasheets_MSDS/duracell/Duracell%20Rechargeable%20AAA.pdf">Duracell</a>)) but we would need two to get 3V (when full) and a holder simply doesn’t fit in the back and it would be quite bulky…</p>
+<p><a class="reference internal" href="_images/AAA_On_PCB_Front.png"><img alt="_images/AAA_On_PCB_Front.png" class="align-center" src="_images/AAA_On_PCB_Front.png" style="height: 300px;" /></a> <a class="reference internal" href="_images/AAA_On_PCB.png"><img alt="_images/AAA_On_PCB.png" class="align-center" src="_images/AAA_On_PCB.png" style="height: 300px;" /></a></p>
+<p>So I guess that leaves us with coin cells. They use a different chemistry, so they provide higher voltages, so we can power the whole thing with one instead of two (that’s good!), but they are smaller, so they have less net capacity (that’s bad!). On a good day, a CR2032 has ~250mA and that’s when you barely draw any current (see the graph below). As they get discharged, voltage quickly drops (see graph below) which might be a problem with white LEDs.</p>
+<a class="reference internal image-reference" href="_images/2032DischargeCurves.jpg"><img alt="_images/2032DischargeCurves.jpg" class="align-center" src="_images/2032DischargeCurves.jpg" style="width: 400px;" /></a>
+<p>Using one cell definitely looks better than using triple As, you can’t see the battery.</p>
+<a class="reference internal image-reference" href="_images/CR2032x2_On_PCB_Front.png"><img alt="_images/CR2032x2_On_PCB_Front.png" class="align-center" src="_images/CR2032x2_On_PCB_Front.png" style="height: 300px;" /></a>
+<p>Another option would be using two cells in series. That wouldn’t “double” the battery life, as the current draw would be the same, but the higher VDD voltage could help to bias a white LED for longer: a single, partially-depleted cell providing 2.2V wouldn’t bias a white LED, but two really-depleted cells providing 1.8V each would still give you 3.6V to comfortably bias the LED. Two cells don’t look bad either, but it might be too heavy/chunky.</p>
+<p><a class="reference internal" href="_images/CR2032x1_On_PCB_Side.png"><img alt="_images/CR2032x1_On_PCB_Side.png" class="align-center" src="_images/CR2032x1_On_PCB_Side.png" style="height: 300px;" /></a> <a class="reference internal" href="_images/CR2032x2_On_PCB_Side.png"><img alt="_images/CR2032x2_On_PCB_Side.png" class="align-center" src="_images/CR2032x2_On_PCB_Side.png" style="height: 300px;" /></a></p>
+<p>NordicRF published a paper that proved that pulsed current demand also helped to provide more energy. The time scales mentioned in the paper are very small for our use case (we don’t want to blink in the 10s of ms range) but the planned paused between cycles might give the battery a break and improve battery life.</p>
+</section>
+<section id="choosing-an-led">
+<h2>Choosing an LED<a class="headerlink" href="#choosing-an-led" title="Permalink to this heading">#</a></h2>
+<p>My first idea was to use white LEDs. They have a relatively high Vf (typically around 3.2V although there are some out there with 2.7V) as they are blue or UV LEDs covered with a phosphor layer. These Vfs are at relatively high currents (20-60mA or even more…), where the LED is the most efficient and designed to operate. Luckily for us, we want to work at a lower bias point because we want to run them at the lowest current possible because 1) we are running on a coin cell and 2) we don’t want to light up the entire room.</p>
+<p>I’ll consider using a coloured LED, as they have smaller Vfs allowing using a small bias resistor, and a white LED, which might require 2 batteries and a bigger bias resistor (so more power lost on the resistor) if their bias point is close to 3V.</p>
+<p>About the bias point, because we have two rings of 6 LEDs, the maximum draw will be ~6 * Iled. Let’s aim for a current of 5mA, which would leave us with a maximum draw of 30mA.</p>
+<section id="yellow-led">
+<h3>Yellow LED<a class="headerlink" href="#yellow-led" title="Permalink to this heading">#</a></h3>
+<p>This is the curve of a cheap-and-cheerful 20mA&#64;2.2V Yellow LED (<a class="reference external" href="https://docs.rs-online.com/2fcb/0900766b8156b2c7.pdf">link to datasheet</a>). The rated luminosity is 100mcd typ, 63mcd min at 20mA.</p>
+<p><a class="reference internal" href="_images/Yellow_LED_Bias.png"><img alt="_images/Yellow_LED_Bias.png" class="align-center" src="_images/Yellow_LED_Bias.png" style="height: 300px;" /></a> <a class="reference internal" href="_images/Yellow_LED_LightvsCurr.png"><img alt="_images/Yellow_LED_LightvsCurr.png" class="align-center" src="_images/Yellow_LED_LightvsCurr.png" style="height: 300px;" /></a></p>
+<p>At 5mA, the voltage drop in the LED is ~2V.</p>
+</section>
+<section id="white-led">
+<h3>White LED<a class="headerlink" href="#white-led" title="Permalink to this heading">#</a></h3>
+<p>I found these Osram white LEDs, which are from a reputable brand and are surprisingly cheap for a white LED. They also operate at 20mA&#64;3.2V, although they are on the coldish side of white, with a temperature of 4K (<a class="reference external" href="https://docs.rs-online.com/4eb6/A700000007295371.pdf">link to datasheet - TOPLED E3014 KW DCLMS2.EC</a>). It’s rated 2800mcd min / 4500 mcd max!! <strong>That’s 40x brighter.</strong></p>
+<p><a class="reference internal" href="_images/KW_DCLMS2_Bias.png"><img alt="_images/KW_DCLMS2_Bias.png" class="align-center" src="_images/KW_DCLMS2_Bias.png" style="height: 300px;" /></a> <a class="reference internal" href="_images/KW_DCLMS2_LightvsCurr.png"><img alt="_images/KW_DCLMS2_LightvsCurr.png" class="align-center" src="_images/KW_DCLMS2_LightvsCurr.png" style="height: 300px;" /></a></p>
+<p>At 5mA, the voltage drop in the LED is ~2.6V. These LEDs are really efficient, and even at 5mA, they are really bright!</p>
+</section>
+<section id="limiting-resistor-calculations">
+<h3>Limiting Resistor Calculations<a class="headerlink" href="#limiting-resistor-calculations" title="Permalink to this heading">#</a></h3>
+<p>This code will calculate the value of the limiting resistors for the LEDs, based on the voltage supplied by the batteries, number of batteries</p>
+<p>A coin cell (CR2032) has this typical discharge rates, were voltage almost instantly drops to 2.8V and provides voltage until 1.8-2V</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">ceil</span>
+
+<span class="k">class</span> <span class="nc">LED</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">Vbias</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">Ibias</span><span class="p">:</span><span class="nb">float</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Vbias</span> <span class="o">=</span> <span class="n">Vbias</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Ibias</span> <span class="o">=</span> <span class="n">Ibias</span>
+
+<span class="k">class</span> <span class="nc">Battery</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maxCellVoltage</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">minCellVoltage</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">numCells</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxCellVoltage</span> <span class="o">=</span> <span class="n">maxCellVoltage</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">minCellVoltage</span> <span class="o">=</span> <span class="n">minCellVoltage</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">numCells</span> <span class="o">=</span> <span class="n">numCells</span>
+    <span class="k">def</span> <span class="nf">maxBattVoltage</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+        <span class="n">aux</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numCells</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxCellVoltage</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">aux</span>
+    <span class="k">def</span> <span class="nf">minCellVoltage</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numCells</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">minCellVoltage</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">findLimiterResistorValue</span><span class="p">(</span><span class="n">LEDObj</span><span class="p">:</span><span class="n">LED</span><span class="p">,</span> <span class="n">battery</span><span class="p">:</span> <span class="n">Battery</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Prints the value of the limiting resistor needed in series with the LED with the</span>
+<span class="sd">    Bias point defined in LEDObj, and some stats</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">        LEDObj: LED</span>
+<span class="sd">            An instance of the LED class, containing the target bias point.</span>
+<span class="sd">        battVoltage: float</span>
+<span class="sd">            The value of the battery voltage connected to the R-LED circuit</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">resistorVoltDropMax</span> <span class="o">=</span> <span class="n">battery</span><span class="o">.</span><span class="n">maxBattVoltage</span><span class="p">()</span> <span class="o">-</span> <span class="n">LEDObj</span><span class="o">.</span><span class="n">Vbias</span>
+    <span class="n">resistorValueMin</span> <span class="o">=</span> <span class="n">ceil</span><span class="p">(</span><span class="n">resistorVoltDropMax</span> <span class="o">/</span> <span class="n">LEDObj</span><span class="o">.</span><span class="n">Ibias</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">LEDObj</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">battery</span><span class="o">.</span><span class="n">numCells</span><span class="si">}</span><span class="s2"> Cells&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Resistor value for </span><span class="si">{</span><span class="n">LEDObj</span><span class="o">.</span><span class="n">Ibias</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="si">}</span><span class="s2">mA LED bias current with fresh cells is </span><span class="si">{</span><span class="n">resistorValueMin</span><span class="si">}</span><span class="s2">Ω and will drop </span><span class="si">{</span><span class="n">resistorVoltDropMax</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">V&quot;</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Power use by LED is </span><span class="si">{</span><span class="n">LEDObj</span><span class="o">.</span><span class="n">Ibias</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">LEDObj</span><span class="o">.</span><span class="n">Vbias</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">mW and Power wasted in R is </span><span class="si">{</span><span class="n">LEDObj</span><span class="o">.</span><span class="n">Ibias</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">resistorVoltDropMax</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">mW&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># White OSRAM LEDs, 20mA@2.7V, 5mA@2.6V, almost the same at 4mA</span>
+<span class="n">whiteLED5mA</span> <span class="o">=</span> <span class="n">LED</span><span class="p">(</span><span class="s2">&quot;OSRAM White LED&quot;</span><span class="p">,</span> <span class="mf">2.6</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">)</span>
+<span class="n">whiteLED4mA</span> <span class="o">=</span> <span class="n">LED</span><span class="p">(</span><span class="s2">&quot;OSRAM White LED&quot;</span><span class="p">,</span> <span class="mf">2.59</span><span class="p">,</span> <span class="mf">0.004</span><span class="p">)</span>
+<span class="c1"># Generic 0603 Yellow LED, bias is 20mA@2.2V, 5mA@2V</span>
+<span class="n">yellowLED5mA</span> <span class="o">=</span> <span class="n">LED</span><span class="p">(</span><span class="s2">&quot;Generic Yellow LED&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">)</span>
+
+<span class="c1"># Single CR2032, starts at ~2.8V and stops at ~1.8V</span>
+<span class="n">singleCell</span> <span class="o">=</span> <span class="n">Battery</span><span class="p">(</span><span class="mf">2.8</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Double CR2032 in series, same current, double the voltage</span>
+<span class="n">doubleCell</span> <span class="o">=</span>  <span class="n">Battery</span><span class="p">(</span><span class="mf">2.8</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Print the values of the limiting resistors needed for the white and yellow LEDs with one and two CR2032 cells</span>
+<span class="n">findLimiterResistorValue</span><span class="p">(</span><span class="n">whiteLED5mA</span><span class="p">,</span> <span class="n">singleCell</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;==============&quot;</span><span class="p">)</span>
+<span class="n">findLimiterResistorValue</span><span class="p">(</span><span class="n">whiteLED5mA</span><span class="p">,</span> <span class="n">doubleCell</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;==============&quot;</span><span class="p">)</span>
+<span class="n">findLimiterResistorValue</span><span class="p">(</span><span class="n">yellowLED5mA</span><span class="p">,</span> <span class="n">singleCell</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;==============&quot;</span><span class="p">)</span>
+<span class="n">findLimiterResistorValue</span><span class="p">(</span><span class="n">yellowLED5mA</span><span class="p">,</span> <span class="n">doubleCell</span><span class="p">)</span>
+<span class="c1"># The White LED was quite bright at 5mA, what would be needed to get it driven at 4mA?</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;==============&quot;</span><span class="p">)</span>
+<span class="n">findLimiterResistorValue</span><span class="p">(</span><span class="n">whiteLED4mA</span><span class="p">,</span> <span class="n">singleCell</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;==============&quot;</span><span class="p">)</span>
+<span class="n">findLimiterResistorValue</span><span class="p">(</span><span class="n">whiteLED4mA</span><span class="p">,</span> <span class="n">doubleCell</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OSRAM White LED - 1 Cells
+Resistor value for 5.0mA LED bias current with fresh cells is 40Ω and will drop 0.20V
+Power use by LED is 13.00mW and Power wasted in R is 1.00mW
+==============
+OSRAM White LED - 2 Cells
+Resistor value for 5.0mA LED bias current with fresh cells is 600Ω and will drop 3.00V
+Power use by LED is 13.00mW and Power wasted in R is 15.00mW
+==============
+Generic Yellow LED - 1 Cells
+Resistor value for 5.0mA LED bias current with fresh cells is 160Ω and will drop 0.80V
+Power use by LED is 10.00mW and Power wasted in R is 4.00mW
+==============
+Generic Yellow LED - 2 Cells
+Resistor value for 5.0mA LED bias current with fresh cells is 720Ω and will drop 3.60V
+Power use by LED is 10.00mW and Power wasted in R is 18.00mW
+==============
+OSRAM White LED - 1 Cells
+Resistor value for 4.0mA LED bias current with fresh cells is 53Ω and will drop 0.21V
+Power use by LED is 10.36mW and Power wasted in R is 0.84mW
+==============
+OSRAM White LED - 2 Cells
+Resistor value for 4.0mA LED bias current with fresh cells is 753Ω and will drop 3.01V
+Power use by LED is 10.36mW and Power wasted in R is 12.04mW
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="ltspice-simulation">
+<h2>LTSPICE Simulation<a class="headerlink" href="#ltspice-simulation" title="Permalink to this heading">#</a></h2>
+<section id="one-coin-cell">
+<h3>One Coin Cell<a class="headerlink" href="#one-coin-cell" title="Permalink to this heading">#</a></h3>
+<p>To see the bias point as the battery drops voltage, we will need to run simulations on LTSpice.</p>
+<p>I found this link about how to model LEDs on LTSpice in electronics stackexchange: <a class="reference external" href="https://electronics.stackexchange.com/questions/9510/how-do-i-model-an-led-with-spice">Modelling an LED</a></p>
+<p>The circuit is as follows</p>
+<a class="reference internal image-reference" href="_images/LTSPice.png"><img alt="_images/LTSPice.png" class="align-center" src="_images/LTSPice.png" style="width: 300px;" /></a>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ltspice</span>
+<span class="kn">from</span> <span class="nn">matplotlib.collections</span> <span class="kn">import</span> <span class="n">LineCollection</span>
+
+<span class="c1"># Get spice simulation data</span>
+<span class="n">filepath</span> <span class="o">=</span> <span class="s1">&#39;LTSpice/LED And Battery Sims 1 Cell.raw&#39;</span>
+<span class="n">l</span> <span class="o">=</span> <span class="n">ltspice</span><span class="o">.</span><span class="n">Ltspice</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+<span class="n">l</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span> <span class="c1"># Data loading sequence. It may take few minutes for huge file.</span>
+<span class="c1"># Get data from simulation</span>
+<span class="n">voltages</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">get_time</span><span class="p">()</span> <span class="c1"># the x axis in the simulation is Voltages, not time</span>
+<span class="n">Vwhite</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;I(D1)&#39;</span><span class="p">)</span>
+<span class="n">Vyellow</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;I(D2)&#39;</span><span class="p">)</span>
+
+<span class="n">fig_spice</span> <span class="o">=</span> <span class="n">figure</span><span class="p">()</span>
+<span class="n">ax_spice</span> <span class="o">=</span> <span class="n">fig_spice</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Plot the two diode curves</span>
+<span class="n">whiteLED</span> <span class="o">=</span> <span class="n">ax_spice</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltages</span><span class="p">,</span> <span class="n">Vwhite</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;White LED RS=40Ω&quot;</span><span class="p">)</span>
+<span class="n">yellowLED</span> <span class="o">=</span> <span class="n">ax_spice</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltages</span><span class="p">,</span> <span class="n">Vyellow</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Yellow LED RS=160Ω&quot;</span><span class="p">)</span>
+
+<span class="c1"># plot a dashed lines at the points the light should go off, more or less</span>
+<span class="n">ax_spice</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mf">1.4</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
+<span class="n">ax_spice</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
+<span class="n">ax_spice</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">2.55</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
+<span class="n">ax_spice</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">2.05</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
+<span class="c1">#Invert the axis, as it&#39;s easier to read &quot;as the battery gets depleted&quot;</span>
+<span class="n">ax_spice</span><span class="o">.</span><span class="n">invert_xaxis</span><span class="p">()</span>
+<span class="n">ax_spice</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;If (mA)&quot;</span><span class="p">)</span>
+<span class="n">ax_spice</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Vbatt (V)&quot;</span><span class="p">)</span>
+<span class="n">ax_spice</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;If/Vbat with 1 Coin Cell&quot;</span><span class="p">)</span>
+<span class="n">ax_spice</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\joel.santos\AppData\Local\Temp\ipykernel_7084\4211692061.py:13: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
+  fig_spice = figure()
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1be4bf277d0&gt;
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "50a05a8d973c4099be19fca74f255d79", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<p>In the case of one coin cell, the current would drop below 1mA at &#64;2V in the case of the yellow diode and current is around 2mA&#64;2.55V in the case of the white (the model is not spot on). That means that the white LED is not going to stay lit for long with one cell… (but check the results for an interesting plot twist!).</p>
+</section>
+<section id="two-coin-cells">
+<h3>Two Coin Cells<a class="headerlink" href="#two-coin-cells" title="Permalink to this heading">#</a></h3>
+<p>For the two coin cells, I will use the same circuit, but I will sweep the voltage from 1.8 * 2 to 2.8 * 2.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get spice simulation data</span>
+<span class="n">filepath</span> <span class="o">=</span> <span class="s1">&#39;LTSpice/LED And Battery Sims - Two Cells.raw&#39;</span>
+<span class="n">l</span> <span class="o">=</span> <span class="n">ltspice</span><span class="o">.</span><span class="n">Ltspice</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+<span class="n">l</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span> <span class="c1"># Data loading sequence. It may take few minutes for huge file.</span>
+<span class="c1"># Get data from simulation</span>
+<span class="n">voltages</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">get_time</span><span class="p">()</span> <span class="c1"># the x axis in the simulation is Voltages, not time</span>
+<span class="n">Vwhite</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;I(D1)&#39;</span><span class="p">)</span>
+<span class="n">Vyellow</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;I(D2)&#39;</span><span class="p">)</span>
+
+<span class="n">fig_spice</span> <span class="o">=</span> <span class="n">figure</span><span class="p">()</span>
+<span class="n">ax_spice</span> <span class="o">=</span> <span class="n">fig_spice</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Plot the two diode curves</span>
+<span class="n">whiteLED</span> <span class="o">=</span> <span class="n">ax_spice</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltages</span><span class="p">,</span> <span class="n">Vwhite</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;White LED RS=40Ω&quot;</span><span class="p">)</span>
+<span class="n">yellowLED</span> <span class="o">=</span> <span class="n">ax_spice</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voltages</span><span class="p">,</span> <span class="n">Vyellow</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Yellow LED RS=160Ω&quot;</span><span class="p">)</span>
+<span class="c1">#Invert the axis, as it&#39;s easier to read &quot;as the battery gets depleted&quot;</span>
+<span class="n">ax_spice</span><span class="o">.</span><span class="n">invert_xaxis</span><span class="p">()</span>
+<span class="n">ax_spice</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;If (mA)&quot;</span><span class="p">)</span>
+<span class="n">ax_spice</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Vbat (V)&quot;</span><span class="p">)</span>
+<span class="n">ax_spice</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;If/Vbat with 1 Coin Cell&quot;</span><span class="p">)</span>
+<span class="n">ax_spice</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1be4d9ef3d0&gt;
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "427ad66183094be8a787afc928ac0135", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<p>With two cells, even when the batteries are depleted, we are still drawing a good 2-2.5mA, so the LEDs will still emit some light. Because of the way voltage drops in a coin cell (non-linearly with a big voltage dip at the end of the cell’s life) this might not translate in a significant increase in battery life for the increased price of the extra battery in the case of the Yellow LED, but the white LED can squeeze quite a lot more energy from the batteries.</p>
+</section>
+</section>
+<section id="testing-it">
+<h2>Testing it<a class="headerlink" href="#testing-it" title="Permalink to this heading">#</a></h2>
+<p>Let’s put it all together and do some tests. The things I want to check are:</p>
+<ul class="simple">
+<li><p>Which pin has to be connected to the reset in the binary counter</p></li>
+<li><p>How long do we want to pause between cycles</p></li>
+<li><p>What’s a good blinking rate that doesn’t get annoying</p></li>
+<li><p>How bright are the LEDs at different bias currents</p></li>
+<li><p>How long does one and two cells last with the different LEDs</p></li>
+</ul>
+<section id="findings">
+<h3>Findings<a class="headerlink" href="#findings" title="Permalink to this heading">#</a></h3>
+<section id="decade-counter-output-connections">
+<h4>Decade counter output connections<a class="headerlink" href="#decade-counter-output-connections" title="Permalink to this heading">#</a></h4>
+<p>The decade counter is active high: outputs are low while they are not selected, and the reset pin needs a HIGH level to reset. I left <code class="docutils literal notranslate"><span class="pre">O0</span></code> unconnected, that will be my “pause” with no lights in the cycle. Then <code class="docutils literal notranslate"><span class="pre">O1</span></code> is the centre LED, <code class="docutils literal notranslate"><span class="pre">O2</span></code> triggers the NPN of the “inner ring” and <code class="docutils literal notranslate"><span class="pre">O3</span></code> the “outter ring”. Reset is connected to <code class="docutils literal notranslate"><span class="pre">O4</span></code>. As soon as <code class="docutils literal notranslate"><span class="pre">O4</span></code> output is enabled, the reset is triggered, which stops resets <code class="docutils literal notranslate"><span class="pre">O4</span></code> to LOW and restarts the counter. <code class="docutils literal notranslate"><span class="pre">O0</span></code> is then HIGH and in the next clock transition, <code class="docutils literal notranslate"><span class="pre">O1</span></code> will turn the centre LED on.</p>
+</section>
+<section id="blinking-pattern">
+<h4>Blinking pattern<a class="headerlink" href="#blinking-pattern" title="Permalink to this heading">#</a></h4>
+<p>One cycle of pause at the end of the cycle felt good. Blinking fast was annoying, 1Hz looked good to me.</p>
+</section>
+<section id="led-brightness-battery-duration">
+<h4>LED Brightness, Battery duration<a class="headerlink" href="#led-brightness-battery-duration" title="Permalink to this heading">#</a></h4>
+<p>5mA is a lot for the white LEDs, they get bright! They were better than the yellow LEDs on every metric. They last longer, they are brighter and while the yellow LED languished with a very pale light (not noticeable during the day) when the battery was dying, the white LEDs were still strong after days of leaving them on.</p>
+<p>Surprisingly, the white LEDs, on one battery, lasted for almost a week of continuous blinking. And it’s not only surprising because of how long it lasted, it is surprising because they outlasted the yellow LEDs by 48+ hours (to be fair, I lost track of how long the white LEDs lasted because it took so long to deplete the battery that I stopped counting). A battery will be more than enough to get you through the festive season.</p>
+<p>I wasn’t expecting this at all. I guess the fact that they are so stupidly efficient compared to the crappy yellow ones makes them very bright even at very low currents, so you can drive them with lower currents, get more light out of them (compared to the yellow ones) and they tax the battery less. White LEDs it is, then.</p>
+<p>They will get particularly bright on a new battery, but</p>
+</section>
+</section>
+<section id="conclusion">
+<h3>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>White Osram LEDs on a single battery are stupidly bright and last enough to use them for a whole “Christmas”, so it’s settled.</p></li>
+<li><p>I ended up using 56Ω current limiting resitstors and the white LEDs were still very bright with a fully charged battery, and quite bright during the whole battery charge.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Snowflake Interactive Documentation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Astable%20Multivibrator%20-%20Simulation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Astable Multivibrator Simulation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-it-do">What does it do?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#led-sequence">LED sequence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clock-generation">Clock Generation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#schmitt-trigger">Schmitt Trigger</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#astable-multivibrator">Astable Multivibrator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#astable-multivibrator-passive-components-values">Astable multivibrator Passive Components Values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#powering-it-up">Powering it up</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-an-led">Choosing an LED</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#yellow-led">Yellow LED</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#white-led">White LED</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limiting-resistor-calculations">Limiting Resistor Calculations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ltspice-simulation">LTSPICE Simulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-coin-cell">One Coin Cell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-coin-cells">Two Coin Cells</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-it">Testing it</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#findings">Findings</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#decade-counter-output-connections">Decade counter output connections</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blinking-pattern">Blinking pattern</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#led-brightness-battery-duration">LED Brightness, Battery duration</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mundodisco8
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
