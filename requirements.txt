@@ -3,3 +3,4 @@ scipy
 numpy
 ipympl
 ltspice
+jupyter-book
