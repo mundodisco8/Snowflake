@@ -4,3 +4,4 @@ numpy
 ipympl
 ltspice
 jupyter-book
+cookiecutter
