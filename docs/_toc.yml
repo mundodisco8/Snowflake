@@ -4,5 +4,5 @@
 format: jb-book
 root: intro
 chapters:
-- file: Design Justification
-- file: Astable Multivibrator - Simulation
+- file: Design_Justification
+- file: Astable_Multivibrator_-_Simulation
