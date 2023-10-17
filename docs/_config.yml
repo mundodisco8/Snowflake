@@ -37,4 +37,4 @@ parse:
 
 launch_buttons:
   notebook_interface: "jupyterlab"
-  binderhub_url: "https://mybinder.org/v2/gh/mundodisco8/Snowflake/HEAD?labpath=docs%2FDesign_Justification.ipynb
+  binderhub_url: "https://mybinder.org/v2/gh/mundodisco8/Snowflake/HEAD?labpath=docs%2FDesign_Justification.ipynb"
