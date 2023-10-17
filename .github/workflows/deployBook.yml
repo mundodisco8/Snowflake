@@ -1,10 +1,13 @@
-name: deploy
+name: deployGithubPages
 
 on:
-  # Trigger the workflow on push to main branch
+  # Trigger the workflow on push to main branch but only when something on docs changes
   push:
     branches:
       - JupyterToWebPage
+      - master
+    paths:
+      - docs/**
 
 # This job installs dependencies, build the book, and pushes it to `gh-pages`
 jobs:

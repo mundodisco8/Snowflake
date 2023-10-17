@@ -5,3 +5,5 @@ ipympl
 ltspice
 jupyter-book
 cookiecutter
+# So binder can show the interactive elements
+jupyter_contrib_nbextensions
