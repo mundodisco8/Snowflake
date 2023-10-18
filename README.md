@@ -15,9 +15,11 @@ A Snowflake Christmas decoration.
 
 Just a design exercise, aiming to get a hand-solderable board (although a bit challenging) that blinks its LEDs without using a microcontoller. I guess you can call it a mix of digital and analogue electronics, because the main trigger is a binary counter that is fed by a clock generated with an opamp in astable multivibrator config.
 
-## Docs Folder
+## Documentation
 
 You can find the [design document](docs/Design%20Justification.ipynb) in the docs section, as a Jupyter notebook.
+
+The documentation can be [explored here](https://mundodisco8.github.io/Snowflake), as a static rendering of the jupyter notebooks, or in binder if you want to play with the sliders.
 
 In the LTSpice folder you will find the circuits used on the Jupyter notebook to guess the current consumption as the battery discharges.
 
