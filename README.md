@@ -17,9 +17,13 @@ Just a design exercise, aiming to get a hand-solderable board (although a bit ch
 
 ## Documentation
 
-You can find the [design document](docs/Design%20Justification.ipynb) in the docs section, as a Jupyter notebook.
+### Design Intention
 
-The documentation can be [explored here](https://mundodisco8.github.io/Snowflake), as a static rendering of the jupyter notebooks, or in binder if you want to play with the sliders.
+You can find the design document in the [docs section](docs/Design%20Justification.ipynb), as a Jupyter notebook, or [better rendered here](https://mundodisco8.github.io/Snowflake), as a static rendering of the jupyter notebooks. For an interactive session, you can launch it on Binder if you want to play with the sliders.
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/mundodisco8/Snowflake/JupyterToWebPage?labpath=docs%2FDesign_Justification.ipynb)
+
+### Other bits and bobs
 
 In the LTSpice folder you will find the circuits used on the Jupyter notebook to guess the current consumption as the battery discharges.
 

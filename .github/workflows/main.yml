@@ -2,6 +2,8 @@ name: Generate Manufacture Artifacts
 
 on:
   push:
+    branches:
+      - master
     paths:
     - '**.sch'
     - '**.kicad_pcb'

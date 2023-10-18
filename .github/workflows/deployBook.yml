@@ -4,7 +4,6 @@ on:
   # Trigger the workflow on push to main branch but only when something on docs changes
   push:
     branches:
-      - JupyterToWebPage
       - master
     paths:
       - docs/**
