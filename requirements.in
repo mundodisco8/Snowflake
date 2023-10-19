@@ -1,0 +1,13 @@
+# Requirements to run the jupyter
+jupyter
+matplotlib
+scipy
+numpy
+ipympl
+ltspice
+jupyter_contrib_nbextensions # So binder can show the interactive elements
+
+# Dev Requirements to mesh around with the book generation etc...
+jupyter-book
+pip-tools # to handle the requirements
+cookiecutter # to create the templates for the Jupyter Book

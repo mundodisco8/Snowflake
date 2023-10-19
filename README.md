@@ -27,6 +27,14 @@ You can find the design document in the [docs section](docs/Design%20Justificati
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/mundodisco8/Snowflake/JupyterToWebPage?labpath=docs%2FDesign_Justification.ipynb)
 
+You might even want to clone this repo and get your hands dirty. If you do, remember to create a virtual environment and install all the requirements.
+
+```bash
+python -m venv venv
+venv/Scripts/Activate.bat # or source venv/bin/activate in Linux/Mac
+python -m pip install -r requirements.txt
+```
+
 ### Other bits and bobs
 
 In the LTSpice folder you will find the circuits used on the Jupyter notebook to guess the current consumption as the battery discharges.
