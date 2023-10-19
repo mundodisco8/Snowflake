@@ -69,8 +69,7 @@
         "lib_footprint_mismatch|69900000|117500000|00000000-0000-0000-0000-00005e1f2863|00000000-0000-0000-0000-000000000000",
         "lib_footprint_mismatch|70000000|82500000|00000000-0000-0000-0000-00005e1f3e95|00000000-0000-0000-0000-000000000000",
         "lib_footprint_mismatch|84500000|109000000|00000000-0000-0000-0000-00005e1f28e7|00000000-0000-0000-0000-000000000000",
-        "lib_footprint_mismatch|84500000|91000000|00000000-0000-0000-0000-00005e1f24d3|00000000-0000-0000-0000-000000000000",
-        "unconnected_items|106446792|88166172|ee01be24-87db-4d20-9926-7ed3bae8dff5|1427f9b9-b43a-4cd4-9af7-21d8f9f12bd9"
+        "lib_footprint_mismatch|84500000|91000000|00000000-0000-0000-0000-00005e1f24d3|00000000-0000-0000-0000-000000000000"
       ],
       "meta": {
         "filename": "board_design_settings.json",
@@ -413,7 +412,7 @@
       "no_connect_dangling": "warning",
       "pin_not_connected": "error",
       "pin_not_driven": "error",
-      "pin_to_pin": "warning",
+      "pin_to_pin": "error",
       "power_pin_not_driven": "error",
       "similar_labels": "warning",
       "simulation_model_issue": "ignore",
@@ -544,7 +543,7 @@
     ]
   ],
   "text_variables": {
-    "GIT_HASH": "<5356b63e>",
-    "TODAY": "2023-10-11"
+    "GIT_HASH": "<367a6b49>",
+    "TODAY": "2023-10-19"
   }
 }
