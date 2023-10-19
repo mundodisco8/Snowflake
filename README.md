@@ -15,6 +15,10 @@ A Snowflake Christmas decoration.
 
 Just a design exercise, aiming to get a hand-solderable board (although a bit challenging) that blinks its LEDs without using a microcontoller. I guess you can call it a mix of digital and analogue electronics, because the main trigger is a binary counter that is fed by a clock generated with an opamp in astable multivibrator config.
 
+## Outputs
+
+The outputs of this project can be found in the Releases area.
+
 ## Documentation
 
 ### Design Intention

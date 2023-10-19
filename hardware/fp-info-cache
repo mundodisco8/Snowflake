@@ -1,4 +1,4 @@
-22012741567533323
+22016155875394480
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -84342,6 +84342,20 @@ solder jumper open
 0
 2
 2
+Snowflake
+TestPoint_Pad_D1.0mm
+SMD pad as test Point, diameter 1.0mm
+test point SMD pad
+0
+1
+1
+Snowflake
+TestPoint_Pad_D1.0mm_NoSilk
+SMD pad as test Point, diameter 1.0mm
+test point SMD pad
+0
+1
+1
 Snowflake
 Turn_This!
 

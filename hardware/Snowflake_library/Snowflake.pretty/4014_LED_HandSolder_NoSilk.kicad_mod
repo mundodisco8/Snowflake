@@ -103,9 +103,9 @@
     (stroke (width 0.1) (type solid)) (layer "F.Fab") (tstamp 2db0f5b2-ecc1-4c21-be4e-40f3222eef31))
   (fp_arc (start 1.5 0.12378) (mid 1.493384 0.161352) (end 1.474333 0.194405)
     (stroke (width 0.1) (type solid)) (layer "F.Fab") (tstamp 46fa76e1-fcd6-47f9-b683-20cfdb4f8b95))
-  (pad "A" smd roundrect (at 1.35 0) (size 1.4 1) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25)
+  (pad "A" smd roundrect (at 1.45 0) (size 1.6 1) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25)
     (solder_paste_margin -0.1) (tstamp fc5f8530-4c2b-4e47-bb0a-f565c96cc3dc))
-  (pad "K" smd roundrect (at -0.85 0) (size 2.2 1) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25)
+  (pad "K" smd roundrect (at -1 0) (size 2.5 1) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25)
     (solder_paste_margin -0.1) (tstamp 441e8cee-7d7a-4926-be2f-ad48fe963f5d))
   (group "" (id e8ff6473-cbaf-4f7f-900b-cafaf7c73b83)
     (members
