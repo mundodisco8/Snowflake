@@ -236,3 +236,4 @@ pyvenv.cfg
 pip-selfcheck.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python,virtualenv,jupyternotebooks
+kicost_WITH_KEYS_DO_NOT_COMMIT.yaml
