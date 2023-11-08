@@ -1,11 +1,11 @@
-(footprint "4014_LED_HandSolder_NoSilk" (version 20221018) (generator pcbnew)
+(footprint "3014_LED_HandSolder_NoSilk" (version 20221018) (generator pcbnew)
   (layer "F.Cu")
   (attr smd)
   (fp_text reference "REF**" (at 0 -1.9 unlocked) (layer "F.Fab") hide
       (effects (font (size 1 1) (thickness 0.15)))
     (tstamp cf049256-a96d-44d4-8f63-1616bedf67aa)
   )
-  (fp_text value "4014_LED_HandSolder_NoSilk" (at 0 1.7 unlocked) (layer "F.Fab")
+  (fp_text value "3014_LED_HandSolder_NoSilk" (at 0 1.7 unlocked) (layer "F.Fab")
       (effects (font (size 0.5 0.5) (thickness 0.125)))
     (tstamp 6a54bd18-7df4-4a2e-95d0-0a8b77eaf42d)
   )
